@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+  <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+{include file="index/seokey"}
+{include file="index/include"}
+ </head>
+ <body>
+{include file="index/header"}
+<div class="typeWarp">
+  <div class="container">
+   <div class="row">
+    <div class="macplus-pannel macplus-pannel-bg clearfix macplus-top-10">
+     <div class="macplus-pannel-box macplus-pannel_dd">
+      <div class="macplus-pannel_hd">
+
+	   <div class="classifyList">
+	   <ul class="macplus-screen__list filter swiper-wrapper clearfix">
+        <li class="swiper-slide"><span class="text-muted">按栏目</span></li>
+		{maccms:type ids="parent" order="asc" by="sort" flag="vod"}
+		<li class="swiper-slide{if$vo.type_id==$obj.type_id||$vo.type_id==$obj.parent.type_id} active{/if}"><a href="{:mac_url_type($vo,['area'=>'','lang'=>'','year'=>'','by'=>$param.by],'type')}">{$vo.type_name}</a></li>
+		{/maccms:type}
+
+       </ul>
+	   </div>
+{if condition="($obj['type_id']==1) OR ($obj['parent']['type_id']==1)"}
+	   <div id="classifyList01" class="classifyList bottom-line-dot">
+	   <ul class="macplus-screen__list type swiper-wrapper clearfix">
+        <li class="swiper-slide"><span class="text-muted">按分类</span></li>
+		<li class="swiper-slide active"><a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'show')}">全部</a></li>
+                {maccms:type ids="child" parent="1" by="sort" order="asc"}
+        <li class="swiper-slide"><a href="{:mac_url_type($vo,[],'show')}">{$vo.type_name}</a></li>
+                    {/maccms:type}
+       </ul>
+	   </div>
+{elseif condition="($obj['type_id']==2) OR ($obj['parent']['type_id']==2)"}	  
+	   <div id="classifyList01" class="classifyList bottom-line-dot">
+	   <ul class="macplus-screen__list type swiper-wrapper clearfix">
+        <li class="swiper-slide"><span class="text-muted">按分类</span></li>
+		<li class="swiper-slide active"><a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'show')}">全部</a></li>
+                {maccms:type ids="child" parent="2" by="sort" order="asc"}
+        <li class="swiper-slide"><a href="{:mac_url_type($vo,[],'show')}">{$vo.type_name}</a></li>
+                {/maccms:type}
+        </ul>
+	   </div>
+ {/if} 
+
+	   <div id="classifyList02" class="classifyList bottom-line-dot">
+	   <ul class="macplus-screen__list type swiper-wrapper clearfix">
+        <li class="swiper-slide"><span class="text-muted">按类型</span></li>
+		<li class="swiper-slide active"><a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'show')}">全部</a></li>
+                {empty name="$obj.type_extend.class"}
+                    {maccms:foreach name=":explode(',',$obj.parent.type_extend.class)"}
+        <li class="swiper-slide"><a href="{:mac_url_type($obj,['class'=>$vo],'show')}">{$vo}</a></li>
+                    {/maccms:foreach}
+                {else /}
+                    {maccms:foreach name=":explode(',',$obj.type_extend.class)"}
+        <li class="swiper-slide"><a href="{:mac_url_type($obj,['class'=>$vo],'show')}">{$vo}</a></li>
+                    {/maccms:foreach}
+                {/empty}
+       </ul>
+	   </div>
+	   <div id="classifyList03" class="classifyList bottom-line-dot">
+	   <ul class="macplus-screen__list type swiper-wrapper clearfix">
+        <li class="swiper-slide"><span class="text-muted">按地区</span></li>
+		<li class="swiper-slide active"><a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'show')}">全部</a></li>
+                {empty name="$obj.type_extend.area"}
+                    {maccms:foreach name=":explode(',',$obj.parent.type_extend.area)"}
+        <li class="swiper-slide"><a href="{:mac_url_type($obj,['class'=>$vo],'show')}">{$vo}</a></li>
+                    {/maccms:foreach}
+                {else /}
+                    {maccms:foreach name=":explode(',',$obj.type_extend.area)"}
+        <li class="swiper-slide"><a href="{:mac_url_type($obj,['area'=>$vo],'show')}">{$vo}</a></li>
+                    {/maccms:foreach}
+                {/empty}
+       </ul>
+	   </div>
+	   <div id="classifyList04" class="classifyList">
+	   <ul class="macplus-screen__list type swiper-wrapper clearfix">
+        <li class="swiper-slide"><span class="text-muted">按年份</span></li>
+		<li class="swiper-slide active"><a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'show')}">全部</a></li>
+                {empty name="$obj.type_extend.year"}
+                    {maccms:foreach name=":explode(',',$obj.parent.type_extend.year)"}
+        <li class="swiper-slide"><a href="{:mac_url_type($obj,['class'=>$vo],'show')}">{$vo}</a></li>
+                    {/maccms:foreach}
+                {else /}
+                    {maccms:foreach name=":explode(',',$obj.type_extend.year)"}
+        <li class="swiper-slide"><a href="{:mac_url_type($obj,['year'=>$vo],'show')}">{$vo}</a></li>
+                    {/maccms:foreach}
+                {/empty}
+            </ul>
+	      </div>
+         </div>
+	   </div>
+	  </div>
+    </div>
+  </div>
+</div>
+  <div class="container">
+   <div class="row">
+    <div class="macplus-pannel macplus-pannel-bg clearfix">
+      <div class="macplusd-list-head">
+	    <ul class="macplusd-list-hd">{maccms:vod num="42" paging="yes" type="current" order="desc" by="time"}{/maccms:vod}
+		<li class="item current"><a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'time' ],'show')}" class="text-green">按时间</a></li>
+		<li class="item"><a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'hits' ],'show')}" >按人气</a></li>
+		<li class="item"><a href="{:mac_url_type($obj,['area'=>$param['area'],'lang'=>$param['lang'],'year'=>$param['year'],'level'=>$param['level'],'letter'=>$param['letter'],'state'=>$param['state'],'tag'=>$param['tag'],'class'=>$param['class'],'order'=>$param['order'],'by'=>'score' ],'show')}">按评分</a></li>
+		<span class="more text-muted pull-right"><span class="hidden-xs">当前第&nbsp;<span class="text-green">{$__PAGING__.page_current}</span>&nbsp;页，</span>共&nbsp;<span class="text-green">{$__PAGING__.record_total}</span>&nbsp;个影片</span>
+		</ul>
+		</div>
+       <div class="macplus-vodlist clearfix">
+{maccms:vod num="42" paging="yes" type="current" order="desc" by="time"}
+         <li class="col-md-7 col-sm-4 col-xs-3">
+          {include file="index/vod_img"}
+		  </li>
+		  {/maccms:vod}
+       </div>
+{include file="index/pageer"}
+       </div>
+      </div>
+     </div>
+    </div>
+{include file="index/footer"}
+</body>
+</html>

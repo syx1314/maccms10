@@ -1,0 +1,8 @@
+          <div class="macplus-vodlist__bag">
+           <a class="macplus-vodlist__thumb lazyload" href="{:mac_url_vod_detail($vo2)}" title="{$vo2.vod_name}" data-original="{:mac_url_img($vo2.vod_pic)}">
+		   <span class="pic-text text-right">{$vo2.vod_remarks}</span>{notempty name="vo2.vod_version"}<i class="video-tag">{$vo2.vod_version}</i>{/notempty}</a>
+           <div class="macplus-vodlist__detail active">
+            <h4 class="title text-overflow"><a href="{:mac_url_vod_detail($vo2)}" title="{$vo2.vod_name}">{$vo2.vod_name}</a></h4>
+            <p class="text text-overflow text-muted hidden-xs">{if condition="$vo2.vod_actor gt ''"}{$vo2.vod_actor}{else/}主演：未知{/if}</p>
+           </div>
+          </div>

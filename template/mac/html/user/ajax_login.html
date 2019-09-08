@@ -1,0 +1,33 @@
+	<div class="macplus-login-mode anim-scale">
+	<div class="macplus-login-header">
+          <a class="macplus-login-close" href="javascript:;">×</a>
+          <h2 class="macplus-login-title">会员登录</h2>
+        </div>
+		<div class="macplus-login-body">
+    <form class="mac_login_form clearfix">
+        <div class="login_form_group">
+            <input type="text" class="mac_u_name input" name="user_name" placeholder="手机/登录账号">
+			<span class="user_zh">　</span>
+        </div>
+        <div class="login_form_group">
+            <input type="password" class="mac_u_pwd input" name="user_pwd" placeholder="登录密码">
+			<span class="user_mm">　</span>
+        </div>
+        {if condition="$GLOBALS['config']['user']['login_verify'] eq 1"}
+        <div class="login_form_group clearfix">
+            <input type="text" class="mac_u_verify input" name="verify" placeholder="请输入验证码">
+            <img class="mac_verify_img" src="{:url('verify/index')}" onclick="this.src = this.src+'?'">
+			<span class="user_yzm">　</span>
+        </div>
+        {/if}
+        <div class="login_form_group">
+            <input type="button" class="login_form_submit btn btn-primary" value="登录">
+        </div>
+        <div class="login_form_group">
+            <a href="{:url('user/reg')}">注册账号</a>
+            <a href="{:url('user/findpass')}" class="pull-right">密码找回</a>
+        </div>
+    </form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,93 @@
+<?php $name = 'favs'; ?>
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+  <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>我的收藏 - 个人中心 - {$maccms.site_name}</title> 
+  <meta name="keywords" content="个人中心,{$maccms.site_keywords}" /> 
+  <meta name="description" content="{$maccms.site_description}" />
+{include file="index/include"}
+ </head>
+ <body>
+{include file="index/header"}
+{include file="user/left"}
+       <div class="macplus-user-rows"><h2>我的收藏<a class="hidden-lg pull-right font-16"  href="{:mac_url('user/index')}">返回</a></h2></div> 
+       	<form id="form1" name="form1" method="post"> 
+        <ul class="macplus-user-rows text-center"> 
+         <li class="col-xs-4 col-lg-10 text-overflow"> <a class="col-xs-1 btn btn-primary" href="javascript:;" onclick="MAC.CheckBox.All('ids[]');">全选</a> </li> 
+         <li class="col-xs-4 col-lg-10 text-overflow"> <a class="col-xs-1 btn btn-primary" href="javascript:;" onclick="MAC.CheckBox.Other('ids[]');">反选</a> </li> 
+         <li class="col-xs-4 col-lg-10 text-overflow"> <a class="col-xs-1 btn btn-primary" href="javascript:;" id="btnDel">删除</a> </li> 
+         <li class="col-xs-4 col-lg-10 text-overflow"> <a class="col-xs-1 btn btn-primary" href="javascript:;" id="btnClear">清空</a> </li> 
+        </ul> 
+       <ul class="macplus-user-rows macplus-pannel-bg"> 
+	   {volist name="list" id="vo"}
+        <li class="padding-x macplus-user-rows line-top"> 
+         <div class="block font-16 macplus-user-rows"> 
+          <span class="col-xs-wide-6 col-sm-wide-8 text-overflow"><input name="ids[]" type="checkbox" value="{$vo.ulog_id}" /> <a target="_blank" href="{if condition="$vo.ulog_mid eq 1"} /index.php/vod/play/id/{$vo.ulog_rid}/sid/1/nid/1.html {else} {$vo.data.link} {/if}">[{$vo.data.type.type_name}] {$vo.data.name} </a></span> 
+          <span class="col-xs-wide-2 col-sm-wide-10 text-overflow"><a target="_blank" href="{if condition="$vo.ulog_mid eq 1"} /index.php/vod/play/id/{$vo.ulog_rid}/sid/1/nid/1.html {else} {$vo.data.link} {/if}">重新观看</a>继续观看</a></span> 
+		  <span class="col-xs-wide-2 col-sm-wide-10 text-overflow">消费积分:{$vo.ulog_points}</span> 
+         </div> </li>{/volist} 
+		 </div>
+       </ul> 
+		{if$__PAGING__.page_total>1} 
+		<div class="macplus-page text-center clearfix">
+			<ul class="macplus-page_info">
+				<li><a class="page_link" href="{$__PAGING__.page_url|str_replace='PAGELINK',1,###}" title="首页">首页</a></li>
+				<li><a class="page_link" href="{$__PAGING__.page_url|str_replace='PAGELINK',$__PAGING__.page_prev,###}" title="上一页">上一页</a></li>
+				<li class="active visible-xs"><span class="num">{$__PAGING__.page_current}/{$__PAGING__.page_total}</span></li>
+				{volist name="$__PAGING__.page_num" id="num"}
+				{if condition="$__PAGING__['page_current'] eq $num"}
+				<li class="hidden-xs active"><a class="page-link" href="javascript:;" title="第{$num}页">{$num}</a></li>
+				{else}
+				<li class="hidden-xs"><a class="page-link" href="{$__PAGING__.page_url|str_replace='PAGELINK',$num,###}" title="第{$num}页" >{$num}</a></li>
+				{/if}
+				{/volist}
+				<li><a class="page_link" href="{$__PAGING__.page_url|str_replace='PAGELINK',$__PAGING__.page_next,###}" title="下一页">下一页</a></li>
+				<li><a class="page_link" href="{$__PAGING__.page_url|str_replace='PAGELINK',$__PAGING__.page_total,###}" title="尾页">尾页</a></li>
+			</ul>
+		</div>
+		{/if}
+	   </form> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+</div> 
+{include file="index/footer"}
+{include file="user/footer"}
+  <script>
+	function delData(ids,all){
+		var msg ='删除';
+		if(all==1){
+			msg='清空';
+		}
+		if(confirm('确定要'+msg+'记录吗')){
+			$.post("{:url('user/ulog_del')}",{ids:ids,type:2,all:all},function(data) {
+				if (data.code == '1') {
+					alert('删除成功');
+					location.reload();
+				}else {
+					alert('删除失败：' + data.msg);
+				}
+			}, 'json')
+		}
+	}
+	$("#btnClear").click(function(){
+		delData('',1);
+	});
+	$("#btnDel").click(function(){
+		var ids = MAC.CheckBox.Ids('ids[]');
+		if(ids==''){
+			alert("请至少选择一个数据");
+			return;
+		}
+		delData(ids,0);
+	});
+
+</script>  
+ </body>
+</html>

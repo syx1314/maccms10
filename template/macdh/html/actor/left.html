@@ -1,0 +1,18 @@
+     <div class="macplus-pannel macplus-pannel-bg clearfix">
+      <div class="macplus-pannel-box">
+       <div class="macplus-pannel_hd">
+        <div class="macplus-pannel__head clearfix">
+		<span class="more text-muted pull-right">共&nbsp;<span class="text-green">{$obj.vod_list|count}</span>&nbsp;个影片</span>
+         <h3 class="title">该明星参演过的影片</h3>
+        </div>
+       </div>
+       <div class="macplus-pannel_bd">
+        <ul class="macplus-vodlist__bd clearfix">
+		{maccms:vod num="100" actor="'.$obj['actor_name'].'" type="all" order="desc" by="time" id="vo2" key="key2"}
+         <li class="col-md-5 col-sm-4 col-xs-3">
+		  {include file="index/vod_img3"}
+		  </li>
+		{/maccms:vod}
+        </ul>
+       </div>
+      </div>

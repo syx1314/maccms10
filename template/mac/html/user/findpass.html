@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+  <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>找回密码 - {$maccms.site_name}</title>
+  <meta name="keywords" content="{$maccms.site_keywords}"/>
+  <meta name="description" content="{$maccms.site_description}"/>
+{include file="index/include"}
+ </head>
+ <body>
+{include file="index/header"}
+<div class="loginWarp">
+  <div class="container">
+   <div class="row">
+   <div class="macplus-pannel macplus-pannel-bg clearfix login-main">
+   <div class="login-main-left">
+              <div class="text-center login-main-header">
+                <img src="{$maccms.path}macplus/img/logo.png" class="login-main-img" alt="LOGO">
+                <h2>欢迎加入</h2>
+                <p>海量高清美女写真视频免费在线观看</p>
+              </div>
+              <form method="post" id="fm" action="">
+                <div class="form-group">
+                  <label>账号</label>
+                  <input type="text" id="user_name" name="user_name" class="form-control" placeholder="请输入您的登录账号">
+                </div>
+                <div class="form-group">
+                  <label>密保问题</label>
+                  <input type="text" id="user_question" name="user_question" class="form-control" placeholder="请输入您密码密保问题">
+                </div>
+                <div class="form-group">
+                  <label>密保答案</label>
+                  <input type="text" id="user_answer" name="user_answer" class="form-control" placeholder="请输入您的密码密保答案">
+                </div>
+                <div class="form-group">
+                  <label>新密码</label>
+                  <input type="password" id="user_pwd" name="user_pwd" class="form-control" placeholder="请输入您的新密码">
+                </div>
+                <div class="form-group">
+                  <label>确认密码</label>
+                  <input type="password" id="user_pwd2" name="user_pwd2" class="form-control" placeholder="请输入您的确认密码">
+                </div>
+				<div class="form-group">
+				  <label>验证码</label>
+				  <input type="text" class="form-control" id="verify" name="verify" placeholder="请输入验证码">
+				  <img class="form-mt3" id="verify_img" src="{:url('verify/index')}" onClick="this.src=this.src+'?'"  alt="单击刷新" />
+				</div>
+				 <div class="form-mt4 clearfix">
+                      <input type="button" id="btn_submit" class="btn btn-primary col-xs-1" value="立即找回">
+                </div>
+              </form>
+              <div class="text-center form-mt5">
+                <p class="light-gray">想起密码了? <a href="{:url('user/login')}">直接登录</a></p>
+              </div>
+            </div>
+          </div>
+	     </div>
+      </div>
+   </div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$("body").bind('keyup',function(event) {
+			if(event.keyCode==13){ $('#btnLogin').click(); }
+		});
+		$('#btn_send').click(function() {
+			if ($('#to').val()  == '') { alert('请输入{$param["ac_text"]}！'); $("#to").focus(); return false; }
+
+			$.ajax({
+				url: "{:url('user/findpass_msg')}",
+				type: "post",
+				dataType: "json",
+				data: $('#fm').serialize(),
+				beforeSend: function () {
+					$("#btn_send").css("background","#fd6a6a").val("loading...");
+				},
+				success: function (r) {
+					alert(r.msg);
+				},
+				complete: function () {
+					$('#verify').click();
+					$("#btn_send").css("background","#fa4646").val("发送邮件");
+				}
+			});
+		});
+
+		$('#btn_submit').click(function() {
+			if ($('#to').val()  == '') { alert('请输入{$param["ac_text"]}'); $("#to").focus(); return false; }
+			if ($('#code').val()  == '') { alert('请输入验证码！'); $("#code").focus(); return false; }
+			if ($('#user_pwd').val()  == '') { alert('请输入新密码！'); $("#user_pwd").focus(); return false; }
+			if ($('#user_pwd2').val()  == '') { alert('请输入确认密码！'); $("#user_pwd2").focus(); return false; }
+			if ($('#user_pwd').val()  != $('#user_pwd2').val() ) { alert('二次密码不一致！'); $("#user_pwd2").focus(); return false; }
+
+			var data= {ac:'{$param["ac"]}',to:$('#to').val(),code:$('#code').val(),user_pwd:$('#user_pwd').val(),user_pwd2:$('#user_pwd2').val()};
+			$.ajax({
+				url: "{:url('user/findpass_reset')}",
+				type: "post",
+				dataType: "json",
+				data: data,
+				beforeSend: function () {
+					$("#btn_submit").css("background","#fd6a6a").val("loading...");
+				},
+				success: function (r) {
+					alert(r.msg);
+				},
+				complete: function () {
+					$("#btn_submit").css("background","#fa4646").val("重置密码");
+				}
+			});
+		});
+	});
+
+</script>
+{include file="index/footer"}
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!-- 页头 -->
+<header class="site_head{if$maccms.aid==15} site_head_play{/if} {if condition="($maccms.aid == 15) OR ($maccms.aid == 1) "}" id="header-top"{else /} site_head_sticky"{/if}>
+ <div class="container"> 
+   <div class="row"> 
+    <div class="head_inner clearfix"> 
+     <div class="site_logo"><a href="{$maccms.path}" class="link_logo"></a></div> 
+     <div class="site_channel hidden-xs"> 
+      <li class="channel_title hidden-sm hidden-md">{if$maccms.aid==11}{$obj.type_name}{elseif$maccms.aid==6}会员{elseif$maccms.aid==7}榜单{elseif$maccms.aid==12}{$obj.type_name}{elseif$maccms.aid==13}搜索{elseif$maccms.aid==14}{empty name="$obj.type_1.type_name"}{$obj.type.type_name}{else /}{$obj.type_1.type_name}{/empty}{elseif$maccms.aid==15}{empty name="$obj.type_1.type_name"}{$obj.type.type_name}{else /}{$obj.type_1.type_name}{/empty}{elseif$maccms.mid==2}资讯{elseif$maccms.mid==3}专题{/if}</li> 
+      <li class="channel_area hidden-sm"><a href="{$maccms.path}" class="channel_home"><i class="icon_sm icon_home_sm"></i><span class="icon_text">首页</span></a> </li> 
+      <li class="channel_momo"> 
+        <a href="javascript:;" class="channel_more"><i class="icon_sm icon_menu_sm"></i><span class="icon_text">频道</span></a> 
+        <div class="nav_more_pop"> 
+         <div class="nav_pop_inner"> 
+          <i class="triangle_up"><i class="triangle_inner"></i></i> 
+          <ul class="nav_pop_content"> 
+			<a href="{$maccms.path}" class="link_nav">首页</a>
+			{maccms:type ids="parent" order="asc" by="sort"}
+<a href="{:mac_url_type($vo)}" class="link_nav{if condition="($vo.type_id eq MAC_TYPE_ID || $vo.type_id eq MAC_TYPE_PID)"} text-green{/if}">{$vo.type_name}</a>
+            {/maccms:type}
+<a href="{:mac_url('label/zhibo')}" class="link_nav{if$maccms.mid==80} text-green{/if}">直播</a>
+<a href="{:mac_url_topic_index()}" class="link_nav{if$maccms.mid==3} text-green{/if}">专题</a>
+<a href="{:mac_url_actor_index()}" class="link_nav{if$maccms.mid==80} text-green{/if}">明星</a>
+<a href="网址" class="link_nav{if$maccms.mid==80} text-green{/if}">自定义</a>
+	   </div>
+	 </div>
+      </ul>
+      </li> 
+     </div> 
+     <div class="site_search"> 
+	   <form class="form-horizontal" id="search" name="search" method="get" action="{:mac_url('vod/search')}" onSubmit="return qrsearch();">
+       <div class="search_inner"> 
+        <div class="search_keywords">
+		<input type="text" name="wd" class="search_input mac_wd" placeholder="{if$maccms.aid==13}{$param.wd}{$param.actor}{$param.director}{$param.area}{$param.lang}{$param.year}{$param.class}{else /}请输入影片名称{/if}"  onclick="chkblk(this)"/></div> 
+        <button class="search_btn mac_search" type="submit" value="搜索影片">
+		<li class="hidden-xs"><i class="icon icon_search"></i><span class="btn_inner">全网搜</span></li> 
+		<li class="visible-xs"><i class="iconfont icon-search"></i></li></button> 
+        <li class="hidden-xs"><a class="btn_search_hot hidden-xs" href="{:mac_url('label/all-top')}" title="热搜榜" target="_blank"><i class="icon_search_hot_sm"></i> <i class="icon_search_hot_animation"></i></a></li>
+		<li class="visible-xs"><a class="search-close" href="javascript:;">取消</a></li>
+       </div> 
+      </form> 
+      <div class="mod_smartbox hidden-xs hide"> 
+       <div class="sb_history"> 
+        <div class="sb_head"> 
+         <span class="sb_title">历史记录<a class="sehistoryclean text-muted pull-right" href="">清除记录</a></span> 
+        </div> 
+        <div class="sb_body"></div> 
+       </div> 
+       <div class="sb_hot"> 
+        <div class="sb_head"> 
+         <span class="sb_title">热门搜索</span> 
+        </div> 
+        <div class="sb_body"> 
+		{maccms:foreach name=":explode(',',$maccms.search_hot)" id="vo2" key="key2"}
+<li class="sb_item{if$key2 < 3} sb_item_{$key2+1}{/if}"><a href="{:mac_url('vod/search',['wd'=>$vo2])}"><span class="sb_num">{$key2+1}</span><span class="sb_name">{$vo2}</span></a></li> 
+		{/maccms:foreach}
+</div> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="site_quick hidden-xs"> 
+      <li class="quick_item quick_vip"> 
+       <a href="javascript:;" class="quick_link" target="_blank"><i class="icon icon_vip_golden"></i><span class="quick_text">VIP</span> </a> 
+      </li> 
+      <li class="quick_item quick_history"> 
+       <a class="quick_link" href="javascript:void(0);"><i class="icon icon_time"></i><span class="quick_text">看过</span><i class="triangle_up"><i class="triangle_inner"></i></i></a> 
+       <div class="site_quick_pop mod_pop_history"> 
+		  <div class="quick_pop_inner"> 
+		   <div class="pop_info_content" id="modHistoryContent"> 
+			 <div class="pop_timeline_wrap">
+				<div class="timeline_video_wrap">
+			<dl class="timeline_video_list history_earlier"></dl> 
+			</div> 
+		   </div> 
+		  </div>
+       </div> 
+      </li> 
+      <li class="quick_item quick_upload hidden-sm"><a href="http://go.qin52.com" class="quick_link"><i class="icon icon_upload"></i><span class="quick_text">商城</span></a></li> 
+<!-- 	  <li class="quick_item quick_collect hidden-sm"><a href="javascript:;" class="quick_link"><i class="icon icon_collect"></i><span class="quick_text">看单</span></a></li>  -->
+      <li class="quick_item quick_client hidden-sm"><a href="javascript:;" class="quick_link"><i class="icon icon_client"></i> <span class="quick_text">客户端</span></a></li> 
+    {if condition="$GLOBALS['user']['user_id']" gt 0}
+	 <li class="quick_item quick_user"><a href="javascript:;" class="quick_link"><img src="{$user.user_portrait|mac_default='macplus/img/avatar.jpg'|mac_url_img}" /></a>
+	 <div class="mod_quick_pop mod_pop_user">
+            <div class="quick_pop_inner">
+				<i class="triangle_up"><i class="triangle_inner"></i></i>
+				<div class="pop_info_content">
+                    <div class="quick_pop_user">
+                        <div class="quick_pop_user_hd">
+                            <span class="account_type __accout_type_name">个人账号：</span>
+                            <a href="{:mac_url('user/index')}" class="user_name _nickname">{$user.user_name}</a>
+							<a href="{:mac_url('user/index')}" class="link_change" title="会员中心">会员中心</a>
+                            <a href="{:mac_url('user/logout')}" class="link_quit" title="退出">退出</a>
+							{if$user.group.group_name==VIP会员}<span class="tips">账户积分：{$user.user_points}</span>{/if}
+                            <div class="quick_vip_meta"><span class="vip_now">{if$user.group.group_name==VIP会员}到期时间：{$user.user_end_time|mac_day|mac_default='无限期'}{else /}账户积分：{$user.user_points}{/if}</span>
+							<span class="vip_next"><a href="{:mac_url('user/upgrade')}" class="btn_vip_em __open_vip">{if$user.group.group_name==VIP会员}续费{else /}开通{/if}会员</a></span></div>
+							
+                        </div>
+                        <div class="quick_pop_user_bd">
+                            <div class="quick_features clearfix">
+                                <a class="feature_item" href="{:mac_url('user/upgrade')}" target="_blank">
+                                    <i class="icon_feature icon_feature_vb"></i>
+                                    <span class="icon_text">VIP会员</span>
+                                </a>
+                                <a class="feature_item" href="{:mac_url('user/plays')}" target="_blank">
+                                    <i class="icon_feature icon_feature_cloud"></i>
+                                    <span class="icon_text">观看记录</span>
+                                </a>
+                                <a class="feature_item" href="{:mac_url('user/favs')}" target="_blank">
+                                    <i class="icon_feature icon_feature_lottery"></i>
+                                    <span class="icon_text">我的收藏</span>
+                                </a>
+                                <a class="feature_item _download_pc" href="{:mac_url('user/info')}" target="_blank">
+                                    <i class="icon_feature icon_feature_client"></i>
+                                    <span class="icon_text">安心中心</span>
+                                </a>  
+                            </div>
+                        </div>
+                    </div>						
+                </div>
+            </div>
+        </div>
+	 </li>
+	 {else/}
+	 <li class="quick_item quick_user mac_user"><a href="javascript:;" class="quick_link" title="未登录"><img src="{$maccms.path}macplus/img/avatar.jpg" /></a></li>
+	 {/if}
+     </div> 
+      <div class="macplus-header__user">
+       <li class="macplus-lishi"><a href="javascript:;"><i class="icon iconfont icon-clock"></i></a></li>
+       <li class="visible-xs"><a class="open-search" href="javascript:;"><i class="icon iconfont icon-search"></i></a></li>
+	   <li class="visible-xs"><a class="open-navuser" href="{if condition="$GLOBALS['user']['user_id']" gt 0}{:mac_url('user/index')}{else/}{:mac_url('user/login')}{/if}"><i class="icon iconfont icon-account"></i></a></li>
+      </div>
+    </div>
+	<div class="header-nav visible-xs" id="header_sort">
+	  <div class="nav-wrap">
+	    <div class="warp headerTopNav">		
+			<ul class="swiper-wrapper clearfix" >
+			<li class="swiper-slide{if condition="$maccms.aid eq 1"} active{/if}"><a href="{$maccms.path}">首页</a></li>
+            {maccms:type ids="parent" order="asc" by="sort"}
+<li class="swiper-slide{if condition="($vo.type_id eq MAC_TYPE_ID || $vo.type_id eq MAC_TYPE_PID)"} active{/if}"><a href="{:mac_url_type($vo)}">{$vo.type_name}</a></li>
+            {/maccms:type}
+<li class="swiper-slide{if$maccms.mid==300} active{/if}"><a href="{:mac_url('label/zhibo')}">直播</a></li>
+<li class="swiper-slide{if$maccms.mid==3} active{/if}"><a href="{:mac_url_topic_index()}">专题</a></li>
+<li class="swiper-slide{if$maccms.mid==80} active{/if}"><a href="{:mac_url_actor_index()}">明星</a></li>
+<li class="swiper-slide{if$maccms.mid==80} active{/if}"><a href="网址">自定义</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+    <div class="head_search visible-xs">
+  <div class="search-vod clearfix hide">
+   <div class="search-bd visible-xs"><span class="text-sed">观看记录</span><a class="historyclean pull-right" href="">清空</a></div>
+   <ul class="search-vod-list"></ul>
+  </div>
+  <div class="search-top clearfix hide">
+   <div class="search-bd visible-xs"><span class="text-sed">搜索记录</span><a class="sehistoryclean pull-right" href="">清空</a></div>
+   <ul class="search-top-list"></ul>
+  </div>
+    <div class="search-hei hide"></div>
+  <div class="search-nav clearfix hide">
+   <div class="search-bd visible-xs"><span class="text-sed">热门搜索</span></div>
+   <ul class="search-nav-list">
+    {maccms:foreach name=":explode(',',$maccms.search_hot)" id="vo2" key="key"}
+<li class="search-hd col-xs-2 text-overflow visible-xs"><a href="{:mac_url('vod/search',['wd'=>$vo2])}"><span class="badge {if$key==0}badge-first{elseif$key==1}badge-second{elseif$key==2}badge-third{/if}">{$key+1}</span>{$vo2}</a></li>
+     {/maccms:foreach}
+ </ul>
+   </div>
+  </div>
+ </div>
+</header>

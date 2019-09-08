@@ -1,0 +1,89 @@
+<?php $name = 'index1'; ?>
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+  <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>个人中心 - {$maccms.site_name}</title> 
+  <meta name="keywords" content="个人中心,{$maccms.site_keywords}" /> 
+  <meta name="description" content="{$maccms.site_description}" />
+{include file="index/include"}
+ </head>
+ <body>
+{include file="index/header"}
+{include file="user/left"}
+       <div class="macplus-user-rows"><h2>我的主页<a class="hidden-lg pull-right font-16"  href="{:mac_url('user/index')}">返回</a></h2></div> 
+       <ul class="macplus-user-rows macplus-pannel-bg"> 
+        <li class="padding-x macplus-user-rows line-top"> 
+         <div class="block font-16 macplus-user-rows"> 
+          <span class="col-xs-wide-3 col-sm-wide-2 text-overflow">用户名</span> 
+          <span class="col-xs-wide-7 col-sm-wide-8 text-overflow">{$obj.user_name}</span> 
+         </div> </li> 
+        <li class="padding-x macplus-user-rows line-top"> 
+         <div class="block font-16 macplus-user-rows"> 
+          <span class="col-xs-wide-3 col-sm-wide-2 text-overflow">所属会员组</span> 
+          <span class="col-xs-wide-7 col-sm-wide-8 text-overflow">{$obj.group.group_name}</span> 
+         </div> </li> 
+        <li class="padding-x macplus-user-rows line-top"> 
+         <div class="block font-16 macplus-user-rows"> 
+          <span class="col-xs-wide-3 col-sm-wide-2 text-overflow">到期时间</span> 
+          <span class="col-xs-wide-7 col-sm-wide-8 text-overflow">{$obj.user_end_time|mac_day|mac_default='无限期'}</span> 
+         </div> </li> 
+        <li class="padding-x macplus-user-rows line-top"> 
+         <div class="block font-16 macplus-user-rows"> 
+          <span class="col-xs-wide-3 col-sm-wide-2 text-overflow">账户积分</span> 
+          <span class="col-xs-wide-7 col-sm-wide-8 text-overflow">{$obj.user_points}</span> 
+         </div> </li> 
+        <li class="padding-x macplus-user-rows line-top"> 
+         <div class="block font-16 macplus-user-rows"> 
+          <span class="col-xs-wide-3 col-sm-wide-2 text-overflow">QQ号码</span> 
+          <span class="col-xs-wide-7 col-sm-wide-8 text-overflow">{$obj.user_qq|mac_default='未填写'}</span> 
+         </div> </li> 
+        <li class="padding-x macplus-user-rows line-top"> 
+         <div class="block font-16 macplus-user-rows"> 
+          <span class="col-xs-wide-3 col-sm-wide-2 text-overflow">邮件地址</span> 
+          <span class="col-xs-wide-7 col-sm-wide-8 text-overflow">{$obj.user_email|mac_default='未填写'}</span> 
+         </div> </li> 
+        <li class="padding-x macplus-user-rows line-top"> 
+         <div class="block font-16 macplus-user-rows"> 
+          <span class="col-xs-wide-3 col-sm-wide-2 text-overflow">联系手机</span> 
+          <span class="col-xs-wide-7 col-sm-wide-8 text-overflow">{$obj.user_phone|mac_default='未填写'}</span> 
+         </div> </li> 
+        <li class="padding-x macplus-user-rows line-top"> 
+         <div class="block font-16 macplus-user-rows"> 
+          <span class="col-xs-wide-3 col-sm-wide-2 text-overflow">注册时间</span> 
+          <span class="col-xs-wide-7 col-sm-wide-8 text-overflow">{$obj.user_reg_time|mac_day|mac_default='未知'}</span> 
+         </div> </li> 
+        <li class="padding-x macplus-user-rows line-top"> 
+         <div class="block font-16 macplus-user-rows"> 
+          <span class="col-xs-wide-3 col-sm-wide-2 text-overflow">登录时间</span> 
+          <span class="col-xs-wide-7 col-sm-wide-8 text-overflow">{$obj.user_login_time|mac_day}</span> 
+         </div> </li> 
+        <li class="padding-x macplus-user-rows line-top"> 
+         <div class="block font-16 macplus-user-rows"> 
+          <span class="col-xs-wide-3 col-sm-wide-2 text-overflow">登录IP</span> 
+          <span class="col-xs-wide-7 col-sm-wide-8 text-overflow">{$obj.user_login_ip|long2ip}</span> 
+         </div> </li> 
+        <li class="padding-x macplus-user-rows line-top"> 
+         <div class="block font-16 macplus-user-rows"> 
+          <span class="col-xs-wide-3 col-sm-wide-2 text-overflow">推广次数</span> 
+          <span class="col-xs-wide-7 col-sm-wide-8 text-overflow">{$obj.user_extend}</span> 
+         </div> </li> 
+        <li class="padding-x macplus-user-rows line-top"> 
+         <div class="block font-16 macplus-user-rows"> 
+          <span class="col-xs-wide-3 col-sm-wide-2 text-overflow">推广链接</span> 
+          <span class="col-xs-wide-7 col-sm-wide-8 text-overflow">{$maccms.http_type}{$maccms.site_url}{:mac_url('user/reg')}?uid={$obj.user_id}</span> 
+         </div> </li> 
+       </ul> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+</div> 
+{include file="index/footer"}
+{include file="user/footer"}
+ </body>
+</html>

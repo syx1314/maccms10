@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+  <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>用户登录 - {$maccms.site_name}</title>
+  <meta name="keywords" content="{$maccms.site_keywords}"/>
+  <meta name="description" content="{$maccms.site_description}"/>
+{include file="index/include"}
+ </head>
+ <body>
+{include file="index/header"}
+<div class="loginWarp">
+  <div class="container">
+   <div class="row">
+   <div class="macplus-pannel macplus-pannel-bg clearfix login-main">
+   <div class="login-main-left">
+              <div class="text-center login-main-header">
+                <img src="{$maccms.path}macplus/img/logo.png" class="login-main-img" alt="LOGO">
+                <h2>欢迎登录</h2>
+                <p>海量高清美女写真视频免费在线观看</p>
+              </div>
+              <form method="post" id="fm" action="">
+                <div class="form-group">
+                  <label>账号</label>
+                  <input type="text" id="user_name" name="user_name" class="form-control" placeholder="请输入您的登录账号" value="" autofocus="" required="">
+                </div>
+                <div class="form-group">
+                  <label>密码</label>
+                  <input type="password" id="user_pwd" name="user_pwd" class="form-control" placeholder="请输入您的登录密码" required="">
+                </div>
+				{if condition="$GLOBALS['config']['user']['login_verify'] eq 1"}
+				<div class="form-group">
+				  <label>验证码</label>
+				  <input type="text" class="form-control" id="verify" name="verify" placeholder="请输入验证码">
+				  <img class="form-mt3" id="verify_img" src="{:url('verify/index')}" onClick="this.src=this.src+'?'"  alt="单击刷新" />
+				</div>{/if}
+				 <div class="form-mt4 clearfix">
+                      <input type="button" id="btn_submit" class="btn btn-primary col-xs-1" value="立即登录">
+                </div>
+              </form>
+			  <div class="form-mt2"><a href="{:url('user/findpass')}">忘记密码?</a></div>
+              <div class="text-center form-mt5"><p class="light-gray">还不是会员?<a href="{:url('user/reg')}">立即注册</a></p></div>
+            </div>
+          </div>
+	     </div>
+      </div>
+   </div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$("body").bind('keyup',function(event) {
+			if(event.keyCode==13){ $('#btnLogin').click(); }
+		});
+		$('#btn_submit').click(function() {
+			if ($('#user_name').val()  == '') { alert('请输入用户！'); $("#user_name").focus(); return false; }
+			if ($('#user_pwd').val()  == '') { alert('请输入密码！'); $("#user_pwd").focus(); return false; }
+			if ($('#verify').length> 0 && $('#verify').val()  == '') { alert('请输入验证码！'); $("#verify").focus(); return false; }
+
+			$.ajax({
+				url: "{:url('user/login')}",
+				type: "post",
+				dataType: "json",
+				data: $('#fm').serialize(),
+				beforeSend: function () {
+					$("#btn_submit").css("background","#fd6a6a").val("loading...");
+				},
+				success: function (r) {
+					if(r.code==1){
+						location.href="{:url('user/index')}";
+					}
+					else{
+						alert(r.msg);
+						$('#verify_img').click();
+					}
+				},
+				complete: function () {
+					$("#btn_submit").css("background","#fa4646").val("立即登录");
+				}
+			});
+
+		});
+	});
+
+</script>
+{include file="index/footer"}
+</body>
+</html>

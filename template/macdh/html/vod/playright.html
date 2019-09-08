@@ -1,0 +1,45 @@
+     <div class="macplus-pannel macplus-pannel-bg clearfix">
+      <div class="macplus-pannel-box">
+       <div class="macplus-pannel_hd">
+        <div class="macplus-pannel__head clearfix">
+		 <h3 class="title">{if$obj.type_id_1==0}<a href="{:mac_url_type($obj.type)}" target="_blank">{$obj.type.type_name}{else /}<a href="{:mac_url_type($obj.type_1)}" target="_blank">{$obj.type_1.type_name}{/if}热播榜</a></h3>
+        </div>
+       </div>
+       <div class="macplus-pannel_bd">
+		{if$obj.type_id_1==0}
+        <ul class="macplus-vodlist__media active col-pd clearfix">
+		{maccms:vod num="1" type="'.$obj['type_id'].'" order="desc" by="hits"}
+			<li class="padding-0">
+				<a class="macplus-vodlist__thumb active lazyload img-shadow" href="{:mac_url_vod_detail($vo)}" title="{$vo.vod_name}" data-original="{:mac_url_img($vo.vod_pic)}">						
+				<span class="play-mask hidden-xs"><em class="play-icon-s"></em></span>
+				<span class="pic-text text-center">{$vo.vod_name}</span>
+				<span class="pic-tag pic-tag-h">Top1</span>						
+				</a>
+			</li>
+		  {/maccms:vod}
+        </ul>
+        <ul class="macplus-vodlist__rank col-pd clearfix">
+		{maccms:vod num="15" type="'.$obj['type_id'].'" order="desc" by="hits"}
+         <li class="text-overflow"><a href="{:mac_url_vod_detail($vo)}" title="{$vo.vod_name}"><span class="badge{if$key==1} badge-first{elseif$key==2} badge-second{elseif$key==3} badge-third{/if}">{$key}</span>{$vo.vod_name|mac_substring=15}<span class="pull-right text-green">{$vo.vod_hits}</span></a></li>
+		{/maccms:vod}
+        </ul>
+		{else /}
+        <ul class="macplus-vodlist__media active col-pd clearfix">
+		{maccms:vod num="1" type="'.$obj['type_id_1'].'" order="desc" by="hits"}
+			<li class="padding-0">
+				<a class="macplus-vodlist__thumb active lazyload img-shadow" href="{:mac_url_vod_detail($vo)}" title="{$vo.vod_name}" data-original="{:mac_url_img($vo.vod_pic)}">						
+				<span class="play-mask hidden-xs"><em class="play-icon-s"></em></span>
+				<span class="pic-text text-center">{$vo.vod_name}</span>
+				<span class="pic-tag pic-tag-h">Top1</span>						
+				</a>
+			</li>
+		  {/maccms:vod}
+        </ul>
+        <ul class="macplus-vodlist__rank col-pd clearfix">
+		{maccms:vod num="15" type="'.$obj['type_id_1'].'" order="desc" by="hits"}
+         <li class="text-overflow"><a href="{:mac_url_vod_detail($vo)}" title="{$vo.vod_name}"><span class="badge{if$key==1} badge-first{elseif$key==2} badge-second{elseif$key==3} badge-third{/if}">{$key}</span>{$vo.vod_name|mac_substring=15}<span class="pull-right text-green">{$vo.vod_hits}</span></a></li>
+		{/maccms:vod}
+        </ul>
+		{/if}
+       </div>
+      </div>

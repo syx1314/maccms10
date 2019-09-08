@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+  <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+{include file="index/seokey"}
+{include file="index/include"}
+ </head>
+ <body>
+{include file="index/header"}
+  <div class="topicWarp">
+		<div class="container">
+			<div class="row">				
+				<div class="macplus-pannel macplus-pannel-bg macplus-top-10 clearfix">
+					<div class="macplus-pannel-box clearfix">
+						<div class="col-md-wide-6 col-xs-1">
+							<div class="macplus-vodlist__thumb img-shadow" style="background: url({$obj.topic_pic|mac_url_img})  no-repeat; background-position:50% 50%; background-size: cover; padding-top: 50%; "></div>																									
+						</div>
+					    <div class="col-md-wide-4 col-xs-1">
+					    	<h3 class="topic-title text-center">{$obj.topic_name}</h3>
+					        <div class="topic-desc text-muted">{$obj.topic_content}</div>	
+					        <div class="share bdsharebuttonbox hidden-sm hidden-xs"></div>
+					    </div>
+					</div>					
+				</div>
+			</div>					
+		 </div>
+		</div>
+ <div class="container Compatible">
+  <div class="row">
+    <div class="col-lg-wide-75 col-xs-1 macplus-top-0">
+{include file="topic/left"}
+     </div>
+    </div>
+    <div class="col-lg-wide-25 col-xs-1 visible-lg">
+{include file="topic/top"}
+     </div>
+    </div>
+	  <div class="mac_hits hits hide" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" "="" data-type="hits"></div>
+   </div>
+  </div>
+{include file="index/footer"}
+</body>
+</html>

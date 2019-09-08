@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+  <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+{include file="index/seokey"}
+{include file="index/include"}
+ </head>
+ <body>
+{include file="index/header"}
+		<div class="container Compatible">
+			<div class="row">
+				<div class="macplus-pannel macplus-pannel-bg macplus-top-10 clearfix">
+					<div class="macplus-pannel-box">
+						<div class="macplus-pannel_hd">
+							<div class="macplus-pannel__head add bottom-line clearfix">
+								<h3 class="title">热门专题</h3>														
+							</div>
+						</div>
+						<div class="macplus-pannel_bd">
+							<ul class="macplus-vodlist clearfix">
+							{maccms:topic num="25" paging="yes" order="desc" by="time"}
+							<li class="col-md-4 col-sm-2 col-xs-1">
+						{include file="index/topic_img"}												
+						</li>
+						{/maccms:topic}
+							</ul>	
+				{include file="index/pageer"}
+						</div>
+					</div>					
+				</div>						
+			</div>
+		</div>
+{include file="index/footer"}
+</body>
+</html>

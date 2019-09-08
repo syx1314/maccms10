@@ -1,0 +1,21 @@
+  <script type="text/javascript" src="{$maccms.path}macplus/js/jquery.imageupload.js"></script>
+  <script type="text/javascript">
+	$(".face").imageUpload({
+		formAction: "{:mac_url('user/portrait')}",
+		inputFileName:'file',
+		browseButtonValue: '修改头像',
+		browseButtonClass:'macplus-user-alter macplus-user-radius',
+		automaticUpload: true,
+		hideDeleteButton: true,
+		hover:true
+	})
+	$(".jQuery-image-upload-controls").mouseenter(function(){
+    $(".jQuery-image-upload-controls").css("display","block");
+	});
+	$(".jQuery-image-upload-controls").mouseleave(function(){
+    $(".jQuery-image-upload-controls").css("display","none");
+	});
+	$(".face").on("imageUpload.uploadFailed", function (ev, err) {
+		alert(err);
+	});
+</script>  

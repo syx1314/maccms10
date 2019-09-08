@@ -1,0 +1,18 @@
+{if$__PAGING__.page_total>1}
+<div class="macplus-page text-center clearfix">
+    <ul class="macplus-page_info">
+        <li><a class="page_link" href="{$__PAGING__.page_url|mac_url_page=1}" title="首页">首页</a></li>
+        <li><a class="page_link" href="{$__PAGING__.page_url|mac_url_page=$__PAGING__.page_prev}" title="上一页">上一页</a></li>
+		<li class="active visible-xs"><span class="num">{$__PAGING__.page_current}/{$__PAGING__.page_total}</span></li>
+        {maccms:foreach name="$__PAGING__.page_num" id="num"}
+        {if condition="$__PAGING__['page_current'] eq $num"}
+        <li class="hidden-xs active"><a class="page-link" href="javascript:;" title="第{$num}页">{$num}</a></li>
+        {else}
+        <li class="hidden-xs"><a class="page-link" href="{$__PAGING__.page_url|mac_url_page=$num}" title="第{$num}页" >{$num}</a></li>
+        {/if}
+        {/maccms:foreach}
+        <li><a class="page_link" href="{$__PAGING__.page_url|mac_url_page=$__PAGING__.page_next}" title="下一页">下一页</a></li>
+        <li><a class="page_link" href="{$__PAGING__.page_url|mac_url_page=$__PAGING__.page_total}" title="尾页">尾页</a></li>
+    </ul>
+</div>
+{/if}

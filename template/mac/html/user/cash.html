@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+  <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>积分记录 - 个人中心 - {$maccms.site_name}</title> 
+  <meta name="keywords" content="个人中心,{$maccms.site_keywords}" /> 
+  <meta name="description" content="{$maccms.site_description}" />
+{include file="index/include"}
+</head>
+<body>
+{include file="index/header"}
+{include file="user/left"}
+<!-- 会员中心 -->
+<div id="member" class="fn-clear">
+   
+    <div id="right">
+		<h2>我的提现记录</h2>
+		<div id="gong">
+			<!-- 修改信息 -->
+			<div class="cur" style="border-color: red;    border-radius: 3px;">
+				<form id="fm" name="fm" method="post" action="" >
+					<p><span class="xiang">剩余{$GLOBALS['user']['user_points']}积分，1元等于{$GLOBALS['config']['user']['cash_ratio']}积分，相当于{$GLOBALS['user']['user_points']/$GLOBALS['config']['user']['cash_ratio']}元，最低提现金额：{$GLOBALS['config']['user']['cash_min']}元</span></p>
+					<p><span class="xiang">银行名称：</span><input type="text" name="cash_bank_name" class="member-input" placeholder="请输入开户行名称或支付宝微信" value="">银行账号：</span><input type="text" name="cash_bank_no" class="member-input" placeholder="请输入银行卡号或支付宝微信账号"  value=""></p>
+					<p><span class="xiang">收款姓名：</span><input type="text" name="cash_payee_name" class="member-input" placeholder="请输入收款人姓名与上方账户对应"  value="">提现金额：</span><input type="text" name="cash_money" class="member-input" placeholder="请输入提现金额"  value=""></p>
+					<li class="col-xs-4">
+					<p style="text-align: center;"><span class="xiang"></span><input type="button" id="btn_submit" class="col-xs-1 btn btn-primary"  value="提交" style="margin: 5px;"></p></li> 
+					
+				</form>
+			</div>
+
+		</div>
+
+		<table width="770" border="0" cellspacing="1" cellpadding="0" class="table">
+		  <tr>
+			<td width="66" height="36" align="center" valign="middle" bgcolor="#f7f7f7">选择</td>
+			<td width="80" align="center" valign="middle" bgcolor="#f7f7f7">编号</td>
+			<td width="100" align="center" valign="middle" bgcolor="#f7f7f7">提现积分</td>
+			<td width="100" align="center" valign="middle" bgcolor="#f7f7f7">提现金额</td>
+			<td width="100" align="center" valign="middle" bgcolor="#f7f7f7">状态</td>
+			<td width="140" align="center" valign="middle" bgcolor="#f7f7f7">时间</td>
+			<td width="80" align="center" valign="middle" bgcolor="#f7f7f7">操作</td>
+		  </tr>
+		  <form id="form1" name="form1" method="post">
+			  {volist name="list" id="vo"}
+		  <tr>
+			<td height="36" align="center" valign="middle" bgcolor="#FFFFFF">
+			<input type="checkbox" name="ids[]" id="checkbox" value="{$vo.cash_id}"/></td>
+			<td align="center" valign="middle" bgcolor="#FFFFFF">{$vo.cash_id}</td>
+			<td align="center" valign="middle" bgcolor="#FFFFFF">{$vo.cash_points}</td>
+			<td align="center" valign="middle" bgcolor="#FFFFFF">{$vo.cash_money}</td>
+			<td align="center" valign="middle" bgcolor="#FFFFFF">{if condition="$vo.cash_status eq '1'"}已审核{else/}未审核{/if}</td>
+			<td align="center" valign="middle" bgcolor="#FFFFFF">{$vo.cash_time|mac_day}</td>
+			<td align="center" valign="middle" bgcolor="#FFFFFF"><a href="javascript:;" onclick="delData({$vo.cash_id},0)" class="delete">删除</a></td>
+		  </tr>
+			  {/volist}
+		  </form>
+		</table>
+		{if$__PAGING__.page_total>1} 
+		<div class="macplus-page text-center clearfix">
+			<ul class="macplus-page_info">
+				<li><a class="page_link" href="{$__PAGING__.page_url|str_replace='PAGELINK',1,###}" title="首页">首页</a></li>
+				<li><a class="page_link" href="{$__PAGING__.page_url|str_replace='PAGELINK',$__PAGING__.page_prev,###}" title="上一页">上一页</a></li>
+				<li class="active visible-xs"><span class="num">{$__PAGING__.page_current}/{$__PAGING__.page_total}</span></li>
+				{volist name="$__PAGING__.page_num" id="num"}
+				{if condition="$__PAGING__['page_current'] eq $num"}
+				<li class="hidden-xs active"><a class="page-link" href="javascript:;" title="第{$num}页">{$num}</a></li>
+				{else}
+				<li class="hidden-xs"><a class="page-link" href="{$__PAGING__.page_url|str_replace='PAGELINK',$num,###}" title="第{$num}页" >{$num}</a></li>
+				{/if}
+				{/volist}
+				<li><a class="page_link" href="{$__PAGING__.page_url|str_replace='PAGELINK',$__PAGING__.page_next,###}" title="下一页">下一页</a></li>
+				<li><a class="page_link" href="{$__PAGING__.page_url|str_replace='PAGELINK',$__PAGING__.page_total,###}" title="尾页">尾页</a></li>
+			</ul>
+		</div>
+		{/if}
+    </div>
+</div>
+<script>
+	function delData(ids,all){
+		var msg ='删除';
+		if(all==1){
+			msg='清空';
+		}
+		if(confirm('确定要'+msg+'记录吗')){
+			$.post("{:url('user/cash_del')}",{ids:ids,all:all},function(data) {
+				if (data.code == '1') {
+					alert('删除成功');
+					location.reload();
+				}else {
+					alert('删除失败：' + data.msg);
+				}
+			}, 'json')
+		}
+	}
+	$("#btnClear").click(function(){
+		delData('',1);
+	});
+	$("#btnDel").click(function(){
+		var ids = MAC.CheckBox.Ids('ids[]');
+		if(ids==''){
+			alert("请至少选择一个数据");
+			return;
+		}
+		delData(ids,0);
+	});
+    $("#btn_submit").click(function() {
+        var cash_bank_name = $('input[name="cash_bank_name"]').val();
+        if(cash_bank_name==''){
+            alert('请输入银行名称');
+            return;
+        }
+        var cash_bank_no = $('input[name="cash_bank_no"]').val();
+        if(cash_bank_no==''){
+            alert('请输入银行账户');
+            return;
+        }
+        var cash_payee_name = $('input[name="cash_payee_name"]').val();
+        if(cash_payee_name==''){
+            alert('请输入收款人姓名');
+            return;
+        }
+        var cash_money = $('input[name="cash_money"]').val();
+        if(cash_money==''){
+            alert('请输入提现金额');
+            return;
+        }
+
+        var data = $("#fm").serialize();
+        $.ajax({
+            url: "{:url('user/cash')}",
+            type: "post",
+            dataType: "json",
+            data: data,
+            beforeSend: function () {
+                //开启loading
+                //$(".loading_box").css("display","block");
+                $("#btn_submit").css("background","#fd6a6a").val("loading...");
+            },
+            success: function (r) {
+                alert(r.msg);
+                if(r.code==1){
+                    location.href="{:url('user/cash')}";
+                }
+            },
+            complete: function () {
+                //结束loading
+                //$(".loading_box").css("display","none");
+                $("#btn_submit").css("background","#fa4646").val("提交");
+            }
+        });
+    });
+</script>
+  </div> 
+   </div> 
+  </div> 
+</div>
+{include file="index/footer"}
+{include file="user/footer"}
+</body>
+</html>

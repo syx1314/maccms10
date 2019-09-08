@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+  <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+{include file="index/seokey"}
+{include file="index/include"}
+{if$param.wd||$param.actor||$param.director||$param.area||$param.lang||$param.year||$param.class}
+  <script type="text/javascript" src="{$maccms.path}macplus/js/seahistory.js"></script>
+  <script type="text/javascript">var sea_name='{$param.wd}{$param.actor}{$param.director}{$param.area}{$param.lang}{$param.year}{$param.class}',sea_url=window.location.href,sea_part='搜索';</script>
+{/if}
+ </head>
+ <body>
+{include file="index/header"}
+    <div class="container Compatible">
+        <div class="row">
+        	<div class="col-lg-wide-75 col-xs-1 padding-0 macplus-top-10 macplus-lefter">	
+			   	<div class="macplus-pannel macplus-pannel-bg clearfix">
+					<div class="macplus-pannel-box">
+						<div class="macplus-pannel_hd">
+							<div class="macplus-pannel__head active bottom-line text-overflow clearfix">	
+								<h3 class="title">关于"<span class="text-red">{$param.wd}{$param.actor}{$param.director}{$param.area}{$param.lang}{$param.year}{$param.class}</span>"搜索结果</h3>
+								{maccms:vod num="10" paging="yes" pageurl="vod/search" order="desc" by="time"}{/maccms:vod}
+									<span class="more text-muted pull-right"><span class="hidden-xs">当前第&nbsp;<span class="text-green">{$__PAGING__.page_current}</span>&nbsp;页，</span>共&nbsp;<span class="text-green">{$__PAGING__.record_total}</span>&nbsp;个影片</span>
+							</div>																		
+						</div>
+						<div class="macplus-pannel_bd clearfix">
+							<ul class="macplus-vodlist__media sea col-pd clearfix">
+								{maccms:vod num="10" paging="yes" pageurl="vod/search" order="desc" by="time"}
+								<li class="bottom-line active clearfix">
+									<div class="thumb">									
+										<a class="v-thumb macplus-vodlist__thumb lazyload" href="{:mac_url_vod_detail($vo)}" title="{$vo.vod_name}" data-original="{:mac_url_img($vo.vod_pic)}">
+											<span class="play hidden-xs"></span>
+											<span class="pic-text text-right">{$vo.vod_remarks}</span>
+										</a>																												
+									</div>
+									<div class="detail">
+										<h3 class="title text-overflow"><a href="{:mac_url_vod_detail($vo)}">{:str_replace($param.wd,'<span class="text-red">'.$param.wd.'</span>',$vo['vod_name'])}</a></h3>
+										<p class="text-overflow"><span class="text-muted">导演：</span>{$vo.vod_director}</p>
+										<p class="text-overflow"><span class="text-muted">主演：</span>{$vo.vod_actor}</p>
+										<p class="text-overflow"><span class="text-muted">类型：</span>{$vo.vod_class}<span class="split-line"></span><span class="text-muted">地区：</span>{$vo.vod_area}</p>
+										<p class="text-overflow"><span class="text-muted">年份：</span>{$vo.vod_year}<span class="split-line"></span><span class="text-muted">播放：</span>{$vo.vod_hits}</span></p>		
+										<p class="btn-button"><a class="btn-play btn-primary" href="{:mac_url_vod_detail($vo)}">点击播放</a></p>												    	    																									
+									</div>
+								</li>							
+								{/maccms:vod}
+							</ul>	
+							{include file="index/pageer"}
+						</div>
+					</div>				
+				</div>	            
+
+<!-- 翻页 -->
+			</div>
+
+	<div class="col-lg-wide-25 macplus-pannel-side visible-lg hide macplus-righter">
+	{maccms:type ids="parent" order="asc" by="sort" id="vo1" key="key1" flag="vod"}
+	{if$key1 < 3}
+     <div class="macplus-pannel macplus-pannel-bg clearfix">
+      <div class="macplus-pannel-box">
+       <div class="macplus-pannel_hd">
+        <div class="macplus-pannel__head clearfix">
+         <h3 class="title"><a href="{:mac_url_type($vo1,[],'show')}">{$vo1.type_name}热播榜</a></h3>
+        </div>
+       </div>
+       <div class="macplus-pannel_bd">
+        <ul class="macplus-vodlist__rank col-pd clearfix">
+		{maccms:vod num="15" type="'.$vo1['type_id'].'" order="desc" by="hits"}
+         <li><a class="text-overflow" href="{:mac_url_vod_detail($vo)}" title="{$vo.vod_name}"><span class="text-muted pull-right">{$vo.vod_remarks|mac_substring=8}</span><span class="badge badge-radius{if$key==1} badge-first{elseif$key==2} badge-second{elseif$key==3} badge-third{/if}">{$key}</span>{$vo.vod_name|mac_substring=12}</a></li>
+		{/maccms:vod}
+        </ul>
+       </div>
+      </div>
+	  </div>
+	  {/if}
+	  {/maccms:type}
+    </div>
+	</div>
+	</div>
+{include file="index/footer"}
+</body>
+</html>

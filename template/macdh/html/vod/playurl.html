@@ -1,0 +1,62 @@
+{notempty name="obj.vod_play_list"}
+<div class="{if$maccms.aid==15}macplus-play-list hidden-lg block{else /}macplus-play-list{/if}">
+      <div class="details-play-title clearfix">
+      <ul class="nav nav-tabs hidden-xs" id="playTab">
+	{maccms:foreach name="obj.vod_play_list" id="vo" key="key"}
+	{if$key < 5}
+	<li class="hidden-xs{if$maccms.aid==15}{if$vo.player_info.from==$obj['vod_play_list'][$param['sid']]['player_info']['from']} active{/if}{else}{if$key==1} active{/if}{/if}"><a class="gico {$vo.player_info.from}" href="#con_playlist_{$key}" data-toggle="tab">{$vo.player_info.show}</a></li>
+	{/if}
+	{/maccms:foreach}
+	{maccms:foreach name="obj.vod_play_list" id="vo" key="key"}
+	  {if$key==5}
+          <li class="dropdown player-more">
+            <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">更多<b class="caret"></b></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+			 {/if}
+			 	 {/maccms:foreach}
+			 {maccms:foreach name="obj.vod_play_list" id="vo" key="key"}
+			 {if$key > 4}
+			<li class="fed-hidden-xs"><a class="gico {$vo.player_info.from}" href="#con_playlist_{$key+4}" data-toggle="tab">{$vo.player_info.show}</a></li>
+			{/if}
+			 {/maccms:foreach}
+	{maccms:foreach name="obj.vod_play_list" id="vo" key="key"}
+		{if$key==5}
+          </ul>
+        </li> 
+		{/if}
+	 {/maccms:foreach}
+     </ul>
+<ul class="nav nav-tabs hidden-sm hidden-md hidden-lg">
+         <li class="dropdown mplayer active">
+		 {if$maccms.aid==15}
+		 <a href="#" id="myTabDrop2" class="gico {$obj['vod_play_list'][$param['sid']]['player_info']['from']}" data-toggle="dropdown"><span class="name">{$obj['vod_play_list'][$param['sid']]['player_info']['show']}</span><b class="caret"></b></a>
+		 {else /}
+	 {maccms:foreach name="obj.vod_play_list" id="vo" key="key"}
+	 {if$key==1}
+	 <a href="#" id="myTabDrop2" class="gico {$vo.player_info.from}" data-toggle="dropdown"><span class="name">{$vo.player_info.show}</span><b class="caret"></b></a>
+	 {/if}
+	 {/maccms:foreach}
+		{/if}
+	 <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop2">
+			{maccms:foreach name="obj.vod_play_list" id="vo" key="key"}
+			<li><a class="gico {$vo.player_info.from}" href="#con_playlist_{$key}" tabindex="-1" data-toggle="tab">{$vo.player_info.show}</a></li>
+				{/maccms:foreach}
+                 </ul>
+				</li>   
+  		<li class="pull-right">无法播放切换<span class="text-green">解析</span>或<span class="text-green">播放源</span>。</li>
+			   </ul>
+			</div>
+	<div class="macplus-pannel macplus-pannel-box macplus-pannel-bg">
+		 <div class="{if$maccms.aid==15}player_{/if}playlist macplus-pannel_hd">
+		 {maccms:foreach name="obj.vod_play_list" id="vo" key="key"}
+
+		 <ul class="macplus-content__playlist column8 clearfix fade{if$maccms.aid==15}{if$vo.player_info.from==$obj['vod_play_list'][$param['sid']]['player_info']['from']} in active{/if}{else}{if$key==1} in active{/if}{/if}" id="con_playlist_{$key}">
+		  {maccms:foreach name="vo.urls" id="vo2" key="key2"}
+		  <li{if$key2==$param.nid&&$vo.player_info.from==$obj['vod_play_list'][$param['sid']]['player_info']['from']} class="active"{/if}><a href="{:mac_url_vod_play($obj,['sid'=>$vo.sid,'nid'=>$vo2.nid])}">{$vo2.name}</a></li>
+		  {/maccms:foreach}
+		  </ul>
+       	{/maccms:foreach}
+      </div>
+  </div>
+</div>
+{/notempty}

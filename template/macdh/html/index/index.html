@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+  <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+{include file="index/seokey"}
+{include file="index/include"}
+ </head>
+ <body class="macplus-index">
+{include file="index/header"}
+<!-- 幻灯片 -->
+	<div class="macplus-banner">
+		<div class="slider_inner silder-swiper-container">
+		 <ul class="swiper-wrapper">
+		{maccms:vod num="10" level="9" order="desc" type="current" by="time"}
+		<li class="swiper-slide col-md-15 col-xs-1" style="padding: 0px;"><a href="{:mac_url_vod_detail($vo)}" target="_self">
+		<span class="slider_nav_name hidden-lg">{$vo.vod_name}</span>
+		<div class="macplus-vodlist__thumb slide swiper-lazy" data-background="{:mac_url_img($vo.vod_pic_slide)}" ></div><div class="swiper-lazy-preloader"></div></a></li>
+		{/maccms:vod}
+	   </ul>
+		<div class="swiper-pagination hidden-lg"></div>
+		</div>
+		<div class="slider_nav hidden-sm hidden-xs hidden-md">
+		{maccms:vod num="10" level="9" order="desc" type="current" by="time"}
+		<a class="nav_link{if$key==1} current{/if}" href="{:mac_url_vod_detail($vo)}">
+		  <div class="tit">{$vo.vod_name}</div>
+		  <div class="txt">{$vo.vod_actor}</div></a>
+	{/maccms:vod}
+		</div>  
+		<div class="slider_mask visible-lg"></div>
+	  </div>
+	</div>
+  <div class="container">
+   <div class="row">
+<!--  主页筛选  -->
+     <div  class="macplus-index__screen hidden-sm hidden-xs hidden-md clearfix">
+      <ul class="col-pd clearfix">
+	  {maccms:type ids="1,2" order="desc" by="sort" id="vo1" key="key1"}
+	  <li class="m-bottom-line"><a href="{:mac_url_type($vo1,[],'show')}" class="text-weight">{$vo1.type_name}</a>
+	  {maccms:type parent="'.$vo1['type_id'].'" order="asc" by="sort" id="vo2" key="key2"}
+	  {if$key2 lt 6}
+	  <a href="{:mac_url_type($vo2,[],'show')}">{$vo2.type_name}</a>
+	   {/if}
+	  {/maccms:type}
+	  {if$key1==1}<a href="{:mac_url_type($vo1,[],'show')}">其他剧</a>{/if}
+	  	  </li>
+	  {/maccms:type}
+	  <li class="m-bottom-line">
+	  {maccms:type ids="3" order="desc" by="sort" id="vo1" key="key1"}
+	  <a href="{:mac_url_type($vo1,[],'show')}" class="text-weight">{$vo1.type_name}</a>
+       {maccms:foreach name=":explode(',',$vo1.type_extend.area)" id="vo2" key="key2"}{if$key2 lt 2}<a href="{:mac_url_type($vo1,['area'=>$vo2],'show')}">{$vo2}</a>{/if}{/maccms:foreach}
+	   {/maccms:type}
+	  {maccms:type ids="4" order="desc" by="sort" id="vo1" key="key1"}
+	  <a href="{:mac_url_type($vo1,[],'show')}" class="text-weight">{$vo1.type_name}</a>
+       {maccms:foreach name=":explode(',',$vo1.type_extend.area)" id="vo2" key="key2"}{if$key2 lt 2}<a href="{:mac_url_type($vo1,['area'=>$vo2],'show')}">{$vo2}</a>{/if}{/maccms:foreach}
+	   {/maccms:type}
+	  </li>
+	  <li class="m-bottom-line">
+	  <a href="{:mac_url_topic_index()}" target="_blank" class="item"><i class="icon_tvstore"></i><span>特色专题</span></a>
+	  <a href="{:mac_url('label/all-top')}" target="_blank" class="item"><i class="icon_rank"></i><span>热门搜索</span>
+	  <a href="{:mac_url('label/zhibo')}" target="_blank" class="item"><i class="icon_client"></i><span>直播台</span></a>
+	  <a href="/" class="item1" target="_blank"><span class="item_pic"><img class="pic1" src="{$maccms.path}macplus/img/vip_tx.png" alt="VIP会员"><img class="pic2" src="{$maccms.path}macplus/img/vip_bg.png" alt="VIP会员"></span></a>
+	  </li>
+	  </ul>
+    </div>
+	<!--  今日热点  -->
+    <div class="macplus-pannel macplus-pannel-bg macplus-top-20 clearfix">
+     <div class="macplus-pannel-box clearfix">
+      <div class="macplus-pannel_hd">
+       <div class="macplus-pannel__head active clearfix">
+        <h3 class="title">今日热点</h3>
+        <ul class="nav nav-text pull-right">
+		<li><span class="split-line"></span><a href="{:mac_url('label/all-new')}" class="text-red">24小时更新榜</a></li>
+		{maccms:type ids="5" order="asc" by="sort"}
+		<li><span class="split-line"></span><a href="{:mac_url_type($vo)}" class="text-muted">更多</a></li>
+		{/maccms:type}
+        </ul>
+       </div>
+      </div>
+      <div class="macplus-pannel_bd clearfix">
+       <ul class="macplus-vodlist clearfix">
+	    {maccms:art num="9" paging="yes" type="current" order="desc" by="time"}
+		<li class="col-lg-{if$key==1}3{else /}6{/if} col-md-5 col-sm-4 col-xs-2{if$key > 4} hidden-sm hidden-xs{/if}{if$key > 5} hidden-md{/if}">
+         <div class="macplus-vodlist__bag">
+          <a class="macplus-vodlist__thumb adtive lazyload{if$key==1} top{/if}" href="{:mac_url_art_detail($vo)}" title="{$vo.vod_name}" data-original="{:mac_url_img($vo.art_pic)}"></a>
+          <div class="macplus-vodlist__detail active">
+           <h4 class="title text-overflow"><a href="{:mac_url_art_detail($vo)}" title="{$vo.art_name}">{$vo.art_name}</a></h4>
+          </div>
+         </div></li>
+		{/maccms:art}
+       </ul>
+      </div>
+     </div>
+    </div>
+	<!--  热播推荐  -->
+    <div class="macplus-pannel macplus-pannel-bg clearfix">
+     <div class="macplus-pannel-box clearfix">
+      <div class="macplus-pannel_hd">
+       <div class="macplus-pannel__head active clearfix">
+        <h3 class="title">热播推荐</h3>
+       </div>
+      </div>
+      <div class="macplus-pannel_bd clearfix">
+       <ul class="macplus-vodlist clearfix">
+	    {maccms:vod num="8" order="desc" by="time" level="8"}
+		<li class="swiper-slide col-lg-7 col-md-6 col-sm-4 col-xs-3{if$key > 6} hidden-md hidden-xs{/if}{if$key==8} hidden-lg{/if}">
+         {include file="index/vod_img"}
+		 </li>
+	{/maccms:vod}
+       </ul>
+      </div>
+     </div>
+    </div>
+{maccms:type ids="parent" order="asc" by="sort" id="vo1" key="key1" flag="vod"}
+<!-- {$vo1.type_name} -->
+    <div class="macplus-pannel macplus-pannel-bg clearfix">
+     <div class="macplus-pannel-box">
+      <div class="macplus-pannel_hd">
+       <div class="macplus-pannel__head active clearfix">
+        <a class="more text-muted pull-right" href="{:mac_url_type($vo1,[],'show')}">更多<i class="icon iconfont icon-more"></i></a>
+        <h3 class="title"><a href="{:mac_url_type($vo1,[],'show')}">{$vo1.type_name}</a></h3>
+        <ul class="nav nav-text pull-right hidden-sm hidden-xs">
+		{if$key1 lt 3}
+    {maccms:type parent="'.$vo1['type_id'].'" order="asc" by="sort" id="vo2" key="key2"}
+	{if$key2 < 8}
+     <li><a href="{:mac_url_type($vo2,[],'show')}" class="text-muted">{$vo2.type_name}</a><span class="split-line"></span></li>
+	 {/if}
+    {/maccms:type}
+	{else /}
+     {maccms:foreach name=":explode(',',$vo1.type_extend.area)" id="vo2" key="key2"}
+	 {if$key2 < 8}
+     <li><a href="{:mac_url_type($vo1,['area'=>$vo2],'show')}" class="text-muted">{$vo2}{$vo1.type_name}</a><span class="split-line"></span></li>
+	 {/if}
+     {/maccms:foreach}
+	{/if}
+        </ul>
+       </div>
+      </div>
+      <div class="macplus-pannel_bd clearfix">
+       <div class="col-lg-wide-8 col-xs-1 padding-0">
+        <ul class="macplus-vodlist clearfix">
+		{maccms:vod num="12" type="'.$vo1['type_id'].'" order="desc" by="time"}
+         <li class="col-md-6 col-sm-4 col-xs-3{if$key > 6} hidden-xs{/if}">
+		  {include file="index/vod_img"}
+		  </li>
+		{/maccms:vod}
+        </ul>
+		<div class="macplus-pannel_ft top-line visible-xs clearfix">
+			<a class="text-muted" href="{:mac_url_type($vo1,[],'show')}">查看更多{$vo1.type_name} <i class="icon iconfont icon-more"></i></a>	
+		</div>
+       </div>
+       <div class="col-lg-wide-2 hidden-md hidden-sm hidden-xs">
+        <ul class="macplus-vodlist__media active col-pd clearfix">
+		{maccms:vod num="1" type="'.$vo1['type_id'].'" order="desc" by="hits"}
+			<li class="padding-0">
+				<a class="macplus-vodlist__thumb active lazyload img-shadow" href="{:mac_url_vod_detail($vo)}" title="{$vo.vod_name}" data-original="{:mac_url_img($vo.vod_pic)}">						
+				<span class="play-mask hidden-xs"><em class="play-icon-s"></em></span>
+				<span class="pic-text text-center">{$vo.vod_name}</span>
+				<span class="pic-tag pic-tag-h">Top1</span>						
+				</a>
+			</li>
+		  {/maccms:vod}
+        </ul>
+        <ul class="macplus-vodlist__rank col-pd clearfix">
+		{maccms:vod num="16" type="'.$vo1['type_id'].'" order="desc" by="hits"}
+         <li class="text-overflow"><a href="{:mac_url_vod_detail($vo)}" title="{$vo.vod_name}"><span class="badge{if$key==1} badge-first{elseif$key==2} badge-second{elseif$key==3} badge-third{/if}">{$key}</span>{$vo.vod_name|mac_substring=10}<span class="pull-right text-green">{$vo.vod_remarks|mac_substring=8}</span></a></li>
+		{/maccms:vod}
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div>
+{/maccms:type}
+<!-- 专题 -->
+<div class="macplus-pannel macplus-pannel-bg clearfix">
+	<div class="macplus-pannel-box">
+		<div class="macplus-pannel_hd">
+			<div class="macplus-pannel__head active clearfix">
+				<a class="more text-muted pull-right" href="{:mac_url_topic_index()}">更多 <i class="icon iconfont icon-more"></i></a>
+				<h3 class="title">影视专题</h3>	
+			</div>																		
+		</div>
+		<div class="macplus-pannel_bd clearfix">															
+			<ul class="macplus-vodlist clearfix">
+				{maccms:topic num="4" order="desc" by="sort" ids="all"}
+				<li class="col-md-4 col-sm-2 col-xs-1{if$key > 2} hidden-xs{/if}">
+					{include file="index/topic_img"}	
+				</li>
+				{/maccms:topic}
+			</ul>	
+		</div>	
+		<div class="macplus-pannel_ft top-line visible-xs clearfix">
+			<a class="text-muted" href="{:mac_url_topic_index()}">查看更多专题 <i class="icon iconfont icon-more"></i></a>	
+		</div>
+	</div>
+</div>
+<!-- 友情链接 -->
+    <div class="macplus-pannel macplus-pannel-bg hidden-sm clearfix">
+     <div class="macplus-pannel-box">
+      <div class="macplus-pannel_hd">
+       <div class="macplus-pannel__head active clearfix">
+        <h3 class="title">友情链接</h3>
+       </div>
+      </div>
+      <div class="macplus-pannel_bd clearfix">
+       <div class="col-xs-1">
+        <ul class="macplus-link__text clearfix">		
+        {maccms:link num="100" type="all" order="desc" by="id"}
+        <li><a class="text-muted" href="{$vo.link_url}" target="_blank">{$vo.link_name}</a></li>
+        {/maccms:link}
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+{include file="index/footer"}
+<script type="text/javascript">
+    jQuery(".box").slide({ titCell:".title dd",mainCell:".box_con",delayTime:0 });
+</script>
+<span style="display: none;" class="mac_timming" data-file="" ></span>
+</body>
+</html>

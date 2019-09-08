@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+  <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+{include file="index/seokey"}
+{include file="index/include"}
+ </head>
+ <body class="macplus-index">
+{include file="index/header"}
+<script type="text/javascript">
+try{
+    if (/Linux|iPad|Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+      
+    }else{
+         document.write('<div style="margin-top:85px"></div>');
+    }
+}catch(e){}
+</script>
+  <div class="container">
+   <div class="row">
+    <div class="macplus-pannel macplus-pannel-bg clearfix">
+     <div class="macplus-pannel-box clearfix">
+      <div class="macplus-pannel_hd">
+       <div class="macplus-pannel__head active clearfix">
+        <h3 class="title">明星大全</h3>
+       </div>
+      </div>
+      <div class="macplus-pannel_bd clearfix">
+       <ul class="macplus-vodlist clearfix">
+	    {maccms:actor num="36" paging="yes" order="desc" by="time"}
+		<li class="swiper-slide col-lg-7 col-md-6 col-sm-4 col-xs-3{if$key > 36} hidden-md hidden-xs{/if}{if$key==36} hidden-lg{/if}">
+         {include file="index/vod_img2"}
+		 </li>
+	{/maccms:actor}
+       </ul>
+      </div>
+     </div>
+    </div>
+{include file="index/pageer"}
+{include file="index/footer"}
+</body>
+</html>

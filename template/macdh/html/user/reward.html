@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+  <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>分销记录 - 个人中心 - {$maccms.site_name}</title> 
+  <meta name="keywords" content="个人中心,{$maccms.site_keywords}" /> 
+  <meta name="description" content="{$maccms.site_description}" />
+{include file="index/include"}
+</head>
+<body>
+{include file="index/header"}
+{include file="user/left"}
+<!-- 会员中心 -->
+<div id="member" class="fn-clear">
+    <div id="right">
+		<h2>我的分销记录</h2>
+
+		<div class="list" style="margin-bottom: 10px;">
+			 <ul class="macplus-user-rows text-center"> 
+         {if condition="$param.level eq ''"}
+				<li class="col-xs-4 col-lg-10 text-overflow"> <a class="col-xs-1 btn btn-primary" href="#" >一级</a> </li> 
+				{else/}
+				<li class="col-xs-4 col-lg-10 text-overflow"> <a class="col-xs-1 btn btn-primary" href="{:url('user/reward')}" >一级</a> </li> 
+				{/if}
+				{if condition="$param.level eq '2'"}
+				<li class="col-xs-4 col-lg-10 text-overflow"> <a class="col-xs-1 btn btn-primary" href="#" >二级</a> </li> 
+				{else/}
+				<li class="col-xs-4 col-lg-10 text-overflow"> <a class="col-xs-1 btn btn-primary" href="{:url('user/reward')}?level=2" >二级</a> </li> 
+				{/if}
+				{if condition="$param.level eq '3'"}
+				 <li class="col-xs-4 col-lg-10 text-overflow"> <a class="col-xs-1 btn btn-primary" href="#" >三级</a> </li> 
+				{else/}
+				 <li class="col-xs-4 col-lg-10 text-overflow"> <a class="col-xs-1 btn btn-primary" href="{:url('user/reward')}?level=3" >三级</a> </li> 
+				{/if}
+        </ul> 
+		</div>
+		<table width="770" border="0" cellspacing="1" cellpadding="0" class="table">
+		  <tr>
+			<td width="80" align="center" valign="middle" bgcolor="#f7f7f7">编号</td>
+			<td width="100" align="center" valign="middle" bgcolor="#f7f7f7">会员</td>
+			<td width="140" align="center" valign="middle" bgcolor="#f7f7f7">时间</td>
+		  </tr>
+		  <form id="form1" name="form1" method="post">
+			  {volist name="list" id="vo"}
+		  <tr>
+			<td align="center" valign="middle" bgcolor="#FFFFFF">{$vo.user_id}</td>
+			<td align="center" valign="middle" bgcolor="#FFFFFF">{$vo.user_name}</td>
+			<td align="center" valign="middle" bgcolor="#FFFFFF">{$vo.user_reg_time|mac_day}</td>
+		  </tr>
+			  {/volist}
+		  </form>
+		</table>
+		{if$__PAGING__.page_total>1} 
+		<div class="macplus-page text-center clearfix">
+			<ul class="macplus-page_info">
+				<li><a class="page_link" href="{$__PAGING__.page_url|str_replace='PAGELINK',1,###}" title="首页">首页</a></li>
+				<li><a class="page_link" href="{$__PAGING__.page_url|str_replace='PAGELINK',$__PAGING__.page_prev,###}" title="上一页">上一页</a></li>
+				<li class="active visible-xs"><span class="num">{$__PAGING__.page_current}/{$__PAGING__.page_total}</span></li>
+				{volist name="$__PAGING__.page_num" id="num"}
+				{if condition="$__PAGING__['page_current'] eq $num"}
+				<li class="hidden-xs active"><a class="page-link" href="javascript:;" title="第{$num}页">{$num}</a></li>
+				{else}
+				<li class="hidden-xs"><a class="page-link" href="{$__PAGING__.page_url|str_replace='PAGELINK',$num,###}" title="第{$num}页" >{$num}</a></li>
+				{/if}
+				{/volist}
+				<li><a class="page_link" href="{$__PAGING__.page_url|str_replace='PAGELINK',$__PAGING__.page_next,###}" title="下一页">下一页</a></li>
+				<li><a class="page_link" href="{$__PAGING__.page_url|str_replace='PAGELINK',$__PAGING__.page_total,###}" title="尾页">尾页</a></li>
+			</ul>
+		</div>
+		{/if}
+
+    </div>
+</div>
+<script>
+
+</script>
+  </div> 
+   </div> 
+  </div> 
+</div>
+{include file="index/footer"}
+{include file="user/footer"}
+</body>
+</html>

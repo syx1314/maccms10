@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+  <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+{include file="index/seokey"}
+{include file="index/include"}
+ </head>
+ <body>
+{include file="index/header"}
+	    <div class="container Compatible">
+	        <div class="row">
+				<div class="col-lg-wide-75 col-xs-1 padding-0 macplus-top-10 macplus-lefter">	
+					<div class="macplus-pannel macplus-pannel-bg clearfix">					
+						<div class="macplus-pannel-box clearfix">
+							<div class="macplus-pannel_hd">
+								<div class="macplus-pannel__head add bottom-line clearfix">
+									<h3 class="title">最新{$obj.type_name}</h3>																
+								</div>
+							</div>
+							<div class="macplus-pannel_bd clearfix">											
+								<ul class="macplus-vodlist__media active col-pd clearfix">
+									{maccms:art num="30" paging="yes" type="current" order="desc" by="time"}
+									<li class="bottom-line active clearfix">
+										<div class="thumb">
+											<a class="w-thumb macplus-vodlist__thumb active lazyload" href="{:mac_url_art_detail($vo)}" title="{$vo.art_name}" data-original="{$vo.art_pic|mac_url_img}"><span class="macplus-art-mask hidden-xs"></span></a>
+										</div>	
+										<div class="detail">
+											<h3 class="title text-etwo"><a href="{:mac_url_art_detail($vo)}">{$vo.art_name}</a></h3>										
+											<p class="hidden-xs">{$vo.art_content|mac_filter_html|mac_substring=60}...</p>
+											<p class="margin-0"><span class="text-muted hidden-xs">发布时间：</span>{$vo.art_time|mac_friend_date}<span class="split-line"></span>{$vo.art_hits}次阅读</p>
+										</div>																		
+									</li>
+									{/maccms:art}
+								</ul>
+						{include file="index/pageer"}
+							</div>							
+						</div>
+					</div>						 	
+				</div>
+	<div class="col-lg-wide-25 macplus-pannel-side hidden-md hidden-sm hidden-xs macplus-righter">	
+{include file="art/top"}
+				</div>
+	        </div>
+	    </div>
+{include file="index/footer"}
+ </body>
+</html>

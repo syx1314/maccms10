@@ -1,0 +1,59 @@
+<!-- 页脚 -->
+  <div class="macplus-foot top-line">
+   <div class="container">
+    <div class="row">
+   <div class="footer-center">
+    <p class="text-muted hidden-sm hidden-xs">
+     <a target="_blank" href="{:mac_url('gbook/index')}" class="text-red">求片留言中心</a><span class="split-line"></span>
+     <a target="_blank" href="{:mac_url('label/all-new')}">今日更新</a><span class="split-line"></span>
+     <a target="_blank" href="{:mac_url('rss/baidu')}">网站地图</a><span class="split-line"></span>
+     <a target="_blank" href="{:mac_url('rss/index')}">RSS订阅</a><span class="split-line"></span>
+     <a target="_blank" href="{:mac_url('label/all-top')}">影视榜单</a></p>
+    <p class="visible-xs visible-sm text-muted">视频总量：{:mac_data_count(0,'all','vod')} 今日更新：{:mac_data_count(0,'today','vod')}</p>
+    <p class="hidden-sm hidden-xs text-muted">本站不提供任何视听上传储存服务，所有内容均来至网络自动采集，且已注明相关资源来源</p>
+    <p class="text-muted"><span class="hidden-sm hidden-xs text-muted">若本站收录的节目无意侵犯了贵司权利，请来信告知{$maccms.site_email}，我们会及时处理和删除，谢谢！</span></p>
+	<p class="text-muted">Copyright &copy; 2008-<?php echo date("Y")?> {$maccms.site_name} All Rights Reserved.</p>
+   </div>
+   </div>
+	<div class="macplus-extra hidden-xs clearfix">
+		<li><a class="backtop" href="javascript:scroll(0,0)" style="display: none;"><i class="icon iconfont icon-less"></i></a></li>
+		<li><a class="copylink" href="javascript:;"><i class="icon iconfont icon-share"></i></a></li>
+		<li><a href="{:mac_url('gbook/index')}"><i class="icon iconfont icon-comments"></i></a></li>
+	</div>
+	<div class="hide">{$maccms.site_tj}</div>
+</div>
+<div class="aui-bar aui-bar-tab visible-xs" id="footer">
+<div class="aui-bar-tab-item" id="ftindex" tapmode="">
+	<a href="/" title="首页">
+	        <img src="{$maccms.path}macplus/img/up.png" />
+        <div class="aui-bar-tab-label">首页</div>
+		</a>
+    </div>
+	{maccms:type ids="2" order="asc" by="sort"}
+	<div class="aui-bar-tab-item" id="ftdianshiju" tapmode="">
+	<a href="{:mac_url_type($vo)}" title="电视剧">{/maccms:type}
+	<div class="aui-dot"></div>        <img src="{$maccms.path}macplus/img/icon_2.png" />
+        <div class="aui-bar-tab-label">电视剧</div>
+		</a>
+    </div>
+	{maccms:type ids="1" order="asc" by="sort"}
+	<div class="aui-bar-tab-item" id="ftdianying" tapmode="">
+	<a href="{:mac_url_type($vo)}" title="电影">{/maccms:type}
+	        <img src="{$maccms.path}macplus/img/icon_1.png" />
+        <div class="aui-bar-tab-label">电影</div>
+		</a>
+    </div>
+	{maccms:type ids="4" order="asc" by="sort"}
+	<div class="aui-bar-tab-item" id="ftdongman" tapmode="">
+	<a href="{:mac_url_type($vo)}" title="动漫">{/maccms:type}
+	        <img src="{$maccms.path}macplus/img/icon_4.png" />
+        <div class="aui-bar-tab-label">动漫</div>
+		</a>
+    </div>
+	
+	<div class="aui-bar-tab-item" id="ftzongyi" tapmode="">
+	<a href="http://gg.qin52.com" title="商城">
+	       <img src="{$maccms.path}macplus/img/icon_23.png" />
+        <div class="aui-bar-tab-label">商城</div>
+		</a>
+    </div></div>

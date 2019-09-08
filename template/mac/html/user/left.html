@@ -1,0 +1,41 @@
+ <div class="userWarp">
+  <div class="container">
+   <div class="row">
+    <div class="macplus-pannel-bg"> 
+     <div class="macplus-user-pics"> 
+      <div class="macplus-user-core text-center"> 
+       <div class="macplus-user-image" data-role="{:mac_url('user/portrait')}"> 
+        <img class="face macplus-user-radius" src="{$obj.user_portrait|mac_default='macplus/img/avatar.jpg'|mac_url_img}?v={:time()}" /> 
+       </div> 
+       <span class="text-white macplus-user-padding font-16">{$obj.user_name}</span> 
+      </div> 
+     </div> 
+    </div> 
+    <div class="macplus-user-rows macplus-user-diss"> 
+     <div class="col-lg-wide-25 col-xs-1 macplus-user-t1">
+		<div class="macplus-user-layout macplus-pannel-bg macplus-user-right"> 
+		   <ul class="macplus-user-rows macplus-pannel-bg"> 
+			<li class="padding-x text-center col-xs-3 font-16"> <span class="block text-red macplus-topic">{$obj.user_points}</span> <span class="block">我的积分</span> </li> 
+			<li class="padding-x text-center line-left col-xs-3 font-16"> <span class="block text-red macplus-topic">{$obj.group.group_name}</span> <span class="block">用户组</span> </li> 
+			<li class="padding-x text-center line-left col-xs-3 font-16"> <span class="block text-red macplus-topic">{$obj.user_login_num}</span> <span class="block">登陆次数</span> </li> 
+		   </ul> 
+		  </div> 
+		  <div class="macplus-user-layout macplus-pannel-bg macplus-user-right{if$name==index}{else /} visible-lg{/if}"> 
+		   <ul class="macplus-user-rows macplus-pannel-bg"> 
+			<li class="padding-x macplus-user-rows line-bottom hidden-lg"> <a class="block col-xs-1 font-16 macplus-user-rows{if$name==index1} text-green{/if}" href="{:mac_url('user/ajax_info')}"> <span class="text-overflow">我的主页</span></a> </li> 
+			<li class="padding-x macplus-user-rows line-bottom visible-lg"> <a class="block col-xs-1 font-16 macplus-user-rows{if$name==index} text-green{/if}" href="{:mac_url('user/index')}"> <span class="text-overflow">我的主页</span></a> </li> 
+			<li class="padding-x macplus-user-rows line-bottom"> <a class="block col-xs-1 font-16 macplus-user-rows{if$name==info} text-green{/if}" href="{:mac_url('user/info')}"> <span class="text-overflow">安全中心</span></a> </li> 
+			<li class="padding-x macplus-user-rows line-bottom"> <a class="block col-xs-1 font-16 macplus-user-rows{if$name==favs} text-green{/if}" href="{:mac_url('user/favs')}"> <span class="text-overflow">我的收藏</span></a> </li> 
+			<li class="padding-x macplus-user-rows line-bottom"> <a class="block col-xs-1 font-16 macplus-user-rows{if$name==plays} text-green{/if}" href="{:mac_url('user/plays')}"> <span class="text-overflow">播放记录</span></a> </li> 
+			<li class="padding-x macplus-user-rows line-bottom"> <a class="block col-xs-1 font-16 macplus-user-rows{if$name==popedom} text-green{/if}" href="{:mac_url('user/popedom')}"> <span class="text-overflow">我的权限</span></a> </li> 
+			<li class="padding-x macplus-user-rows line-bottom"> <a class="block col-xs-1 font-16 macplus-user-rows{if$name==buy} text-green{/if}" href="{:mac_url('user/buy')}"> <span class="text-overflow">充值中心</span></a> </li> 
+			<li class="padding-x macplus-user-rows line-bottom"> <a class="block col-xs-1 font-16 macplus-user-rows{if$name==orders} text-green{/if}" href="{:mac_url('user/orders')}"> <span class="text-overflow">充值记录</span></a> </li> 
+			<li class="padding-x macplus-user-rows line-bottom"> <a class="block col-xs-1 font-16 macplus-user-rows{if$name==upgrade} text-green{/if}" href="{:mac_url('user/upgrade')}"> <span class="text-overflow">VIP会员</span></a> </li> 
+			<li class="padding-x macplus-user-rows line-bottom"> <a class="block col-xs-1 font-16 macplus-user-rows{if$name==cash} text-green{/if}" href="{:url('user/cash')}"> <span class="text-overflow">提现记录</span></a> </li> 
+			<li class="padding-x macplus-user-rows line-bottom"> <a class="block col-xs-1 font-16 macplus-user-rows{if$name==reward} text-green{/if}" href="{:url('user/reward')}"> <span class="text-overflow">三级分销</span></a> </li> 
+			<li class="padding-t macplus-user-rows"> <a class="btn btn-primary col-xs-1 text-center" href="{:mac_url('user/logout')}">退出</a> </li> 
+		   </ul> 
+		  </div>
+     </div> 
+     <div class="col-lg-wide-75 col-xs-1 macplus-user-t2{if$name==index} visible-lg{/if}"> 
+      <div class="macplus-user-layout macplus-pannel-bg"> 
