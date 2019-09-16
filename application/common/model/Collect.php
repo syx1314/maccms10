@@ -371,6 +371,7 @@ class Collect extends Base {
     public function syncImages($pic_status,$pic_url,$flag='vod')
     {
         if($pic_status == 1){
+            //TODO:下载图片
             $img_url = model('Image')->down_load($pic_url, $GLOBALS['config']['upload'], $flag);
             $link = MAC_PATH . $img_url;
             $link = str_replace('mac:', $GLOBALS['config']['upload']['protocol'].':', $img_url);
@@ -592,6 +593,7 @@ class Collect extends Base {
                 }
 
                 if (!$info) {
+                    //TODO:同步图片
                     $tmp = $this->syncImages($config['pic'],$v['vod_pic'],'vod');
                     $v['vod_pic'] = (string)$tmp['pic'];
                     $msg = $tmp['msg'];
