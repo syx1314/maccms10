@@ -1,0 +1,20 @@
+<div class="layui-form-item upload_mode mode_MaoYun" {if condition="$config['upload']['mode'] neq 'Maoyun'"}style="display:none;" {/if}>
+<label class="layui-form-label">猫云云存储：</label>
+<div class="layui-input-block">
+    <a href="https://www.maoyuncloud.com/" target="_blank" class="layui-btn layui-btn-primary">点击申请 https://www.maoyuncloud.com/</a>
+</div>
+</div>
+<div class="layui-form-item upload_mode mode_MaoYun" {if condition="$config['upload']['mode'] neq 'Maoyun'"}style="display:none;" {/if}>
+<label class="layui-form-label">APITolenUrl：</label>
+<div class="layui-input-inline w200">
+    <input type="text" name="upload[api][maoyun][urlToken]" placeholder="猫云-TokenURL" value="{$config['upload']['api']['maoyun']['urlToken']}" class="layui-input"  >
+</div>
+<label class="layui-form-label">ID：</label>
+<div class="layui-input-inline w200">
+    <input type="text" name="upload[api][maoyun][id]" placeholder="猫云id-id" value="{$config['upload']['api']['maoyun']['id']}" class="layui-input"  >
+</div>
+<label class="layui-form-label">外链URL：</label>
+<div class="layui-input-inline w200">
+    <input type="text" name="upload[api][maoyun][url]" placeholder="猫云-外链URL" value="{$config['upload']['api']['maoyun']['url']}" class="layui-input"  >
+</div>
+</div>
