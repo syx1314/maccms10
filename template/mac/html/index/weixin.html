@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="shortcut icon" href="{$maccms.path}macplus/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="{$maccms.path}macplus/css/system.css" type="text/css" />
+    <script type="text/javascript" src="{$maccms.path}macplus/js/jquery.min.js"></script>
+    <script type="text/javascript" src="{$maccms.path}macplus/js/default.js"></script>
+    <script type="text/javascript" src="{$maccms.path}macplus/js/system.js"></script>
+    <script type="text/javascript" src="{$maccms.path}macplus/js/appdown.js"></script>
+    <script>var maccms={"path":"__ROOT__","mid":"{$maccms['mid']}","aid":"{$maccms['aid']}","url":"{$maccms['site_url']}","wapurl":"{$maccms['site_wapurl']}","mob_status":"{$maccms['mob_status']}"};</script>
+    {include file="index/seokey"}
+    <script type="text/javascript">
+        $(window).on("load",function(){
+            var winHeight = $(window).height();
+            function is_weixin() {
+                var ua = navigator.userAgent.toLowerCase();
+                if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            var isWeixin = is_weixin();
+            if(isWeixin){
+                $(".weixin-tip").css("height",winHeight);
+                $(".weixin-tip").show();
+            }else {
+                window.location.href="http://catmovie.cn/";
+            }
+        })
+    </script>
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+        }
+        a{
+            text-decoration: none;
+        }
+        img{
+            max-width: 100%;
+            height: auto;
+        }
+        .weixin-tip{
+            display: none;
+            position: fixed;
+            left:0;
+            top:0;
+            bottom:0;
+            background: rgba(0,0,0,0.8);
+            filter:alpha(opacity=80);
+            height: 100%;
+            width: 100%;
+            z-index: 100;
+        }
+        .weixin-tip p{
+            text-align: center;
+            margin-top: 10%;
+            padding:0 5%;
+        }
+    </style>
+</head>
+<body class="macplus-index">
+<div class="weixin-tip">
+    <p>
+        <img src="http://hanpeng.site/banner/1677074-20190509215033349-96014652.jpg" alt="微信打开"/>
+    </p>
+</div>
+</body>
