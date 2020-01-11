@@ -137,18 +137,18 @@ return array (
     'watermark_size' => '40',
     'watermark_color' => '#FF0000',
     'protocol' => 'http',
-    'mode' => 'local',
+    'mode' => 'Ftp',
     'remoteurl' => 'http://img.maccms.com/',
     'api' => 
     array (
       'ftp' => 
       array (
-        'host' => '',
-        'port' => '21',
-        'user' => 'test',
-        'pwd' => 'test',
-        'path' => '/',
-        'url' => '',
+          'host' => '122.114.253.185',
+          'port' => '21',
+          'user' => 'a25',
+          'pwd' => 'wGiXM6mRzD',
+          'path' => '/',
+          'url' => 'http://m.sellervps.com/a25/',
       ),
       'qiniu' => 
       array (
@@ -172,6 +172,12 @@ return array (
         'cookie' => '',
         'time' => '1546239694',
       ),
+      'maoyun'=>
+      array(
+                'id'=>'',
+                'urlToken'=>'',
+                'url'=>''
+            ),
     ),
   ),
   'interface' => 
