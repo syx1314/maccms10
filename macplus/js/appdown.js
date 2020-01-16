@@ -1,6 +1,6 @@
 $(function() {
 if(MAC.UserAgent.mobile){
-var appdw1 = '<div class="layui-waper"><div class="layer-iframe"><div class="layer-content layer_notice"><a href="javascript:;" class="close">跳过</a><a href="javascript:;" class="link">打开APP</a></div></div></div>';
+var appdw1 = '<div class="layui-waper"><div class="layer-iframe"><div class="layer-content layer_notice"><a href="javascript:;" class="close">跳过</a><a href="/appdownload/index.html" class="link">打开APP</a></div></div></div>';
 (function() {
     if (!isWeiXin()) {
         if ($.cookie('appdw1') == null) {

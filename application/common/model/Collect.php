@@ -501,6 +501,14 @@ class Collect extends Base {
                 if (strpos($config['inrule'], 'c')!==false) {
                     $where['vod_year'] = $v['vod_year'];
                 }
+                //给别人做的过滤美国片
+//                if (!strstr($v['vod_area'],'美国')){
+//                    mac_echo("不是美国片,跳过--->".$v['vod_area']);
+//                    $des = '不是美国片，跳过。';
+//                    continue;
+//                }else{
+//                  $des="地区--->".$v['vod_area'];
+//                }
                 if (strpos($config['inrule'], 'd')!==false) {
                     $where['vod_area'] = $v['vod_area'];
                 }

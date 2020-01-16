@@ -1,9 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
+ * Created by daidai.
  * User: Administrator
  * Date: 2019/11/27
  * Time: 上午 10:50
+ * 微信：trsoft66
  */
 
 namespace app\common\extend\upload;
@@ -31,6 +32,7 @@ class MaoYun
         $findTokenUrl = $APITolenUrl."/zyc/object/token?name=" . $this->id . "&url=" . "/".$ob;
         $header = array(
             "Action:GetObjectToken"
+
         );
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $findTokenUrl); // 要访问的地址
@@ -68,6 +70,7 @@ class MaoYun
         $url=$host.$fileName;
         $header = array(
             "Authorization:" . $token,
+            'Referer:http://catmovie.cn'
         );
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -76,6 +79,7 @@ class MaoYun
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch, CURLOPT_AUTOREFERER, 1); // 自动设置Referer
         curl_setopt($ch, CURLOPT_PUT, true); //设置为PUT请求
         curl_setopt($ch, CURLOPT_INFILE, fopen($file, 'rb')); //设置资源句柄
         curl_setopt($ch, CURLOPT_INFILESIZE, filesize($file));
