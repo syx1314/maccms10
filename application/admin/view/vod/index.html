@@ -42,15 +42,15 @@
                 <div class="layui-input-inline w150">
                     <select name="level">
                         <option value="">选择推荐</option>
-                        <option value="9" {if condition="$param['level'] eq '9'"}selected {/if}>推荐9-幻灯</option>
-                        <option value="1" {if condition="$param['level'] eq '1'"}selected {/if}>推荐1</option>
-                        <option value="2" {if condition="$param['level'] eq '2'"}selected {/if}>推荐2</option>
-                        <option value="3" {if condition="$param['level'] eq '3'"}selected {/if}>推荐3</option>
-                        <option value="4" {if condition="$param['level'] eq '4'"}selected {/if}>推荐4</option>
-                        <option value="5" {if condition="$param['level'] eq '5'"}selected {/if}>推荐5</option>
-                        <option value="6" {if condition="$param['level'] eq '6'"}selected {/if}>推荐6</option>
-                        <option value="7" {if condition="$param['level'] eq '7'"}selected {/if}>推荐7</option>
-                        <option value="8" {if condition="$param['level'] eq '8'"}selected {/if}>推荐8</option>
+                        <option value="9" {if condition="$info.vod_level eq 9"}selected{/if}>推荐9-幻灯</option>
+                        <option value="1" {if condition="$info.vod_level eq 1"}selected{/if}>推荐1-院线大片</option>
+                        <option value="2" {if condition="$info.vod_level eq 2"}selected{/if}>推荐2</option>
+                        <option value="3" {if condition="$info.vod_level eq 3"}selected{/if}>推荐3-热播鲜剧</option>
+                        <option value="4" {if condition="$info.vod_level eq 4"}selected{/if}>推荐4-经典动漫</option>
+                        <option value="5" {if condition="$info.vod_level eq 5"}selected{/if}>推荐5-热门综艺</option>
+                        <option value="6" {if condition="$info.vod_level eq 6"}selected{/if}>推荐6</option>
+                        <option value="7" {if condition="$info.vod_level eq 7"}selected{/if}>推荐7</option>
+                        <option value="8" {if condition="$info.vod_level eq 8"}selected{/if}>推荐8</option>
                     </select>
                 </div>
                 <div class="layui-input-inline w150">
